@@ -1,0 +1,196 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap");
+
+*
+{
+    margin: 0;
+    padding: 0;
+    border: none;
+    outline: none;
+    box-sizing: border-box;
+    font-family: "Poppins", sans-serif;
+}
+body{
+    display: flex;
+}
+.sidebar{
+    position: sticky;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    width: 100px;
+    height: 100vh;
+    padding: 0 1.7rem;
+    color: whitesmoke;
+    overflow: hidden;
+    transition: all 0.3s linear;
+    background: maroon;
+}
+.sidebar:hover{
+    width: 240px;
+    transform: 0.3s;
+}
+.logo{
+    height: 80px;
+    padding: 16px;
+}
+.menu{
+    height: 88%;
+    position: relative;
+    list-style: none;
+    padding: 0;
+}
+.menu li{
+    padding: 1rem;
+    margin: 8px 0;
+    border-radius: 8px;
+    transition: all 0.5s ease-in-out;
+}
+.menu li:hover, 
+.active{
+    background: #e0e0e058;
+}
+.menu a{
+    color: aliceblue;
+    font-size: 14px;
+    text-decoration: none;
+    display: flex;
+    gap: 1.5rem;
+}
+.menu a span {
+    overflow: hidden;
+}
+.menu a i {
+    font-size: 1.2rem;
+}
+.logout{
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+}
+.main--content {
+    position: relative;
+    background: rgba(0, 0, 0, 0.1);    
+    width: 100%;
+    padding: 1rem;
+}
+.header--wrapper img{
+    width: 100px;
+    height: 50px;
+    cursor: pointer;
+    border-radius: 50%;
+}
+.header--wrapper {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    background: #fff;
+    border-radius: 10px;
+    padding: 10px 2rem;
+    margin-bottom: 1rem;
+}
+.header--title {
+    color: maroon;
+}
+.user--info {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+.search--box {
+    background: rgb(237, 237, 237);
+    border-radius: 15px;
+    color: maroon;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    padding: 4px 12px;
+}
+.search--box input {
+    background: transparent;
+    padding: 10px;
+}
+.search--box i {
+    font-size: 1.2rem;
+    cursor: pointer;
+    transition: all 0.5s ease-out;
+}
+.search--box i:hover {
+    transform: scale(1.2);
+}
+
+.main{
+    position: relative;
+    padding: 20px;
+    width: 100%;
+}
+
+.course{
+    margin-top: 20px;
+    text-transform: capitalize;
+}
+.course-list{
+    width: 100%;
+    padding: 10px;
+    margin-top: 10px;
+    background: #fff;
+    border-radius: 10px;
+    box-shadow: 0 20px 35px rgba(0, 0, 0, 0.1);
+}
+.student{
+    margin-top: 20px;
+    text-transform: capitalize;
+}
+.student-list{
+    width: 100%;
+    padding: 10px;
+    margin-top: 10px;
+    background: #fff;
+    border-radius: 10px;
+    box-shadow: 0 20px 35px rgba(0, 0, 0, 0.1);
+}
+.college{
+    margin-top: 20px;
+    text-transform: capitalize;
+}
+.college-list{
+    width: 100%;
+    padding: 10px;
+    margin-top: 10px;
+    background: #fff;
+    border-radius: 10px;
+    box-shadow: 0 20px 35px rgba(0, 0, 0, 0.1);
+}
+.table{
+    border-collapse: collapse;
+    margin: 25px 0;
+    font-size: 15px;
+    min-width: 100%;
+    overflow: hidden;
+    border-radius: 5px;
+}
+table thead tr{
+    color: #fff;
+    background: #34AF6D;
+    text-align: left;
+    font-weight: bold;
+}
+
+.table th,
+.table td{
+    padding: 12px 15px;
+}
+.table tbody tr{
+    border-bottom: 1px solid #ddd;
+}
+.table tbody tr:nth-col :nth-child(odd){
+    background: #34AF6D;  
+}
+.table tbody tr.active{
+    font-weight: bold;
+    color: #34AF6D;
+}
+.table tbody tr:last-of-type{
+    border-bottom: 2px solid #34AF6D;
+}
