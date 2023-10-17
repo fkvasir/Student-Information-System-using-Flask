@@ -5,6 +5,7 @@ name = "pypi"
 
 [packages]
 python-dotenv = "*"
+flask = "==2.3.3"
 
 [dev-packages]
 

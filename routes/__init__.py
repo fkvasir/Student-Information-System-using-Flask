@@ -1,0 +1,1 @@
+from .student_bp import student_bp

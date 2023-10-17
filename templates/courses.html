@@ -1,88 +1,30 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8" />
-    <title>
-        SSIS
-    </title>
-    <link rel ="stylesheet" type="text/css" href="{{url_for('static', filename= 'college.css')}}">
-    
-</head>
-<body>
-    <div class="sidebar">
-        <div class="logo"></div>
-        <ul class="menu">
-            <li>
-                <a href="/">
-                    <i class="fa-solid fa-user"></i>
-                    <span>Students</span>
-                </a>
-            </li>
-            <li class="active">
-                <a href="/courses">
-                <i class="fa-solid fa-bars"></i>
-                    <span>Courses</span></a>
-            </li>
-            <li>
-                <a href="/colleges">
-                <i class="fa-solid fa-graduation-cap"></i>
-                    <span>Colleges</span>
-                </a>
-            </li>
-            <li class="logout">
-                <a href="#">
-                    <i class="fas fa-sign-out-alt"></i>
-                    <span>Back to Home</span>
-                </a>
-            </li>
-        </ul>
+{% extends "layouts.html" %}
+{% block content %}
+<section class="course">
+    <div class="course-list">
+        <h1>Courses</h1>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Code</th>
+                    <th>Name</th>
+                    <th>College</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>BSCS</td>
+                    <td>Bachelor of Science in Computer Science</td>
+                    <td>CCS</td>
+                </tr>
+                <tr>
+                    <td>BSIT</td>
+                    <td>Bachelor of Science in Information Technology</td>
+                    <td>CCS</td>
+                </tr>
+            </tbody>
+        </table>
     </div>
-    <div class="main--content">
-        <div class="header--wrapper">
-            <div class="header--title">
-                <span>Dashboard</span>
-                <h2>Courses</h2>
-            </div>
-            <div class="user--info">
-                <div class="search--box">
-                    <i class="fa-solid fa-magnifying-glass"></i>
-                    <input type="text" placeholder="Search"/>
-                </div>
-                <img src="{{ url_for('static', filename='images/MSU_2018_10_25_10_31_04.jpg')}}" alt="Image 1">
-            </div>
-        </div>
-        <section class="main">
-            <section class="course">
-                <div class="course-list">
-                    <h1>Courses</h1>
-                    <table class="table">
-                        <thead>
-                            <tr>
-                                <th>Code</th>
-                                <th>Name</th>
-                                <th>College</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td>BSCS</td>
-                                <td>Bachelor of Science in Computer Science</td>
-                                <td>CCS</td>
-                            </tr>
-                            <tr>
-                                <td>BSIT</td>
-                                <td>Bachelor of Science in Information Technology</td>
-                                <td>CCS</td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-            </section>
-    </div>
-    
-</body>
-<script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
-<script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
-<script src="https://kit.fontawesome.com/23c08e42be.js" crossorigin="anonymous"></script>
-</html>
+</section>
+{% endblock %}
 
