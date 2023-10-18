@@ -184,8 +184,8 @@ table thead tr{
 .table tbody tr{
     border-bottom: 1px solid #ddd;
 }
-.table tbody tr:nth-child(){
-    background: #34AF6D;  
+.table tbody tr:nth-child(even){
+    background: lightgreen;  
 }
 .table tbody tr.active{
     font-weight: bold;
