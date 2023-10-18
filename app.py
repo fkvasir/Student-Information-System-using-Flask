@@ -9,13 +9,13 @@ def index():
 
 @app.route('/courses')
 def courses():
-    return render_template('courses.html')
+    return render_template('courses.html', active_page='courses')
 
 @app.route('/colleges')
 def colleges():
-    return render_template('college.html')
+    return render_template('college.html', active_page='college')
 
-app.register_blueprint(student_bp, url_prefix='/student/')
+app.register_blueprint(student_bp, url_prefix='/students')
 
 if __name__ == '__main__':
     app.run(debug=True)
