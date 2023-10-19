@@ -184,9 +184,9 @@ table thead tr{
 .table tbody tr{
     border-bottom: 1px solid #ddd;
 }
-.table tbody tr:nth-child(even){
+/* .table tbody tr:nth-child(even){
     background: lightgreen;  
-}
+} */
 .table tbody tr.active{
     font-weight: bold;
     color: #34AF6D;
@@ -197,11 +197,39 @@ table thead tr{
 .primary-button {
     background-color: #007BFF;
     color: #fff; 
-    padding: 10px 20px; 
+    padding: 8px 18px; 
     border: none; 
-    border-radius: 4px; 
+    border-radius: 10px; 
     cursor: pointer;
+    font-size: 12px;
+    top: 0;
+    right: 0;
 }
 .primary-button:hover, .primary-button:focus {
     background-color: #0056b3; 
+}
+.button-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px; 
+}
+.course-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.students-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.college-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.button-container {
+    display: flex;
+    align-items: center;
 }

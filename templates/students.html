@@ -4,8 +4,12 @@
 {%block content%}
 <section class="student">
     <div class="student-list">
-        <h1>Students</h1>
-        <button class="primary-button" id="add-students-btn">Add</button>
+        <div class="students-header">
+            <h1>Students</h1>
+            <div class="button-container">
+                <button class="primary-button" id="add-students-btn">Add</button>
+            </div>
+        </div>
         <table class="table">
             <thead>
                 <tr>
@@ -15,6 +19,7 @@
                     <th>Last Name</th>
                     <th>Year</th>
                     <th>Gender</th>
+                    <th>Action</th>
                 </tr>
                 </thead>
                 <tbody>

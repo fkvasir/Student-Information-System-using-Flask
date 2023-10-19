@@ -2,14 +2,19 @@
 {% block content %}
 <section class="course">
     <div class="course-list">
-        <h1>Courses</h1>
-        <button class="primary-button" id="add-course-btn">Add</button>
+        <div class="course-header">
+            <h1>Courses</h1>
+            <div class="button-container">
+                <button class="primary-button" id="add-courses-btn">Add</button>
+            </div>
+        </div>
         <table class="table table-custom">
             <thead>
                 <tr>
                     <th>Code</th>
                     <th>Name</th>
                     <th>College</th>
+                    <th>Action</th>
                 </tr>
             </thead>
             <tbody>
@@ -28,4 +33,3 @@
     </div>
 </section>
 {% endblock %}
-
