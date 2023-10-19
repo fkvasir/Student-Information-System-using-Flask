@@ -10,7 +10,7 @@ def students():
 def colleges():
     return render_template('college.html', active_page='college')
 
-@courses_bp.route('/colleges')
+@courses_bp.route('/courses')
 def courses():
     return render_template('courses.html', active_page='courses')
 
