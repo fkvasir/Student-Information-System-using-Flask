@@ -45,7 +45,7 @@
                                     <input type="text" class="form-control" id="collegeName" name="collegeName" required>
                                 </div>
                                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                                <button type="submit" class="btn btn-primary">Save changes</button>
+                                <button type="submit" class="btn btn-primary">Save</button>
                             </form>
                         </div>
                     </div>
@@ -73,8 +73,10 @@
                         <td>3rd Year</td>
                         <td>Male</td>
                         <td>
-                            <button class="custom-edit-button">Edit</button>
-                            <button class="custom-delete-button">Delete</button>
+                            <button type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#editModal">
+                                Edit
+                            </button>
+                            <button type="button" class="btn btn-danger">Delete</button>
                         </td>
                     </tr>
                     <tr>
@@ -85,8 +87,10 @@
                         <td>4th Year</td>
                         <td>Female</td>
                         <td>
-                            <button class="custom-edit-button">Edit</button>
-                            <button class="custom-delete-button">Delete</button>
+                            <button type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#editModal">
+                                Edit
+                            </button>
+                            <button type="button" class="btn btn-danger">Delete</button>
                         </td>
                     </tr>
                     <tr>
@@ -97,55 +101,57 @@
                         <td>4th Year</td>
                         <td>Female</td>
                         <td>
-                            <button class="custom-edit-button">Edit</button>
-                            <button class="custom-delete-button">Delete</button>
+                            <button type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#editModal">
+                                Edit
+                            </button>
+                            <button type="button" class="btn btn-danger">Delete</button>
                         </td>
                     </tr>
                 </tbody>
-
-                <!-- <section class="course">
-                <div class="course-list">
-                    <table class="table">
-                        <thead>
-                    <tr>
-                                <th>Code</th>
-                                <th>Name</th>
-                                <th>College</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td>BSCS</td>
-                                <td>Bachelor of Science in Computer Science</td>
-                                <td>CCS</td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div> -->
-            <!-- <section class="college">
-                <div class="college-list">
-                    <h1>Colleges</h1>
-                    <table class="table">
-                        <thead>
-                            <tr>
-                                <th>Code</th>
-                                <th>Name</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td>CCS</td>
-                                <td>College of Computer Studies</td>
-                            </tr>
-                            <tr>
-                                <td>CEBA</td>
-                                <td>College of Business and Accountancy</td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-            </section> -->
         </table>    
     </div>
 </section>
+<div class="modal fade" id="editModal" tabindex="-1" aria-labelledby="editModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="editModalLabel">EDIT STUDENTS</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <!-- Add form elements to edit data -->
+                <form id="editForm">
+                    <div class="mb-3">
+                        <label for="editCollegeCode" class="form-label">Student ID</label>
+                        <input type="text" class="form-control" id="editCollegeCode" name="editCollegeCode" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="editCollegeName" class="form-label">First Name</label>
+                        <input type="text" class="form-control" id="editCollegeName" name="editCollegeName" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="editCollegeName" class="form-label">Last Name</label>
+                        <input type="text" class="form-control" id="editCollegeName" name="editCollegeName" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="editCollegeName" class="form-label">Course</label>
+                        <input type="text" class="form-control" id="editCollegeName" name="editCollegeName" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="editCollegeName" class="form-label">Year</label>
+                        <input type="text" class="form-control" id="editCollegeName" name="editCollegeName" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="editCollegeName" class="form-label">Gender</label>
+                        <input type="text" class="form-control" id="editCollegeName" name="editCollegeName" required>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-warning" id="saveEditButton">Update</button>
+            </div>
+        </div>
+    </div>
+</div>
 {% endblock content%}

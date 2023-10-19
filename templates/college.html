@@ -1,14 +1,16 @@
-{%extends "layouts.html"%}
+{% set active_page = 'college' %}
+
+{% extends "layouts.html" %}
 {% block content %}
-<section class="college">
-    <div class="college-list">
-        <div class="college-header">
-            <h1>Colleges</h1>
-            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
-                Add
-            </button>
-        </div>
-        
+    <section class="college">
+        <div class="college-list">
+            <div class="college-header">
+                <h1>Colleges</h1>
+                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                    Add
+                </button>
+            </div>
+
             <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                 <div class="modal-dialog">
                     <div class="modal-content">
@@ -33,30 +35,58 @@
                     </div>
                 </div>
             </div>
-        
-        <table class="table">
-            <thead>
-                <tr>
-                    <th>Code</th>
-                    <th>Name</th>
-                    <th>Action</th>
-                </tr>
-            </thead>
-            <tbody>
-                {% for college in colleges_data %}
-                <tr>
-                    <td>{{college['code']}}</td>
-                    <td>{{ college['name']}}</td>
-                    <td>
-                        <button class="custom-edit-button">Edit</button>
-                        <button class="custom-delete-button">Delete</button>
-                    </td>
-                </tr>
-                {% endfor%}
-            </tbody>
-        </table>
+
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>Code</th>
+                        <th>Name</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for college in colleges_data %}
+                    <tr>
+                        <td>{{ college['code'] }}</td>
+                        <td>{{ college['name'] }}</td>
+                        <td>
+                            <button type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#editModal">
+                                Edit
+                            </button>
+                            <button class="custom-delete-button">Delete</button>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </section>
+
+    <div class="modal fade" id="editModal" tabindex="-1" aria-labelledby="editModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="editModalLabel">Edit College</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <!-- Add form elements to edit data -->
+                    <form id="editForm">
+                        <div class="mb-3">
+                            <label for="editCollegeCode" class="form-label">College Code</label>
+                            <input type="text" class="form-control" id="editCollegeCode" name="editCollegeCode" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="editCollegeName" class="form-label">College Name</label>
+                            <input type="text" class="form-control" id="editCollegeName" name="editCollegeName" required>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-warning" id="saveEditButton">Update</button>
+                </div>
+            </div>
+        </div>
     </div>
-</section>
-
 {% endblock %}
-

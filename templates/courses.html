@@ -1,3 +1,5 @@
+{% set active_page = 'courses'%}
+
 {% extends "layouts.html" %}
 {% block content %}
 <section class="course">
@@ -53,8 +55,10 @@
                     <td>Bachelor of Science in Computer Science</td>
                     <td>CCS</td>
                     <td>
-                        <button class="custom-edit-button">Edit</button>
-                        <button class="custom-delete-button">Delete</button>
+                        <button type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#editModal">
+                            Edit
+                        </button>
+                        <button type="button" class="btn btn-danger">Delete</button>
                     </td>
                 </tr>
                 <tr>
@@ -62,12 +66,45 @@
                     <td>Bachelor of Science in Information Technology</td>
                     <td>CCS</td>
                     <td>
-                        <button class="custom-edit-button">Edit</button>
-                        <button class="custom-delete-button">Delete</button>
+                        <button type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#editModal">
+                            Edit
+                        </button>
+                        <button type="button" class="btn btn-danger">Delete</button>
                     </td>
                 </tr>
             </tbody>
         </table>
     </div>
 </section>
+<div class="modal fade" id="editModal" tabindex="-1" aria-labelledby="editModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="editModalLabel">EDIT COURSES</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <!-- Add form elements to edit data -->
+                <form id="editForm">
+                    <div class="mb-3">
+                        <label for="editCollegeCode" class="form-label">Course Code</label>
+                        <input type="text" class="form-control" id="editCollegeCode" name="editCollegeCode" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="editCollegeName" class="form-label">Course Name</label>
+                        <input type="text" class="form-control" id="editCollegeName" name="editCollegeName" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="editCollegeName" class="form-label">College</label>
+                        <input type="text" class="form-control" id="editCollegeName" name="editCollegeName" required>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-warning" id="saveEditButton">Update</button>
+            </div>
+        </div>
+    </div>
+</div>
 {% endblock %}
