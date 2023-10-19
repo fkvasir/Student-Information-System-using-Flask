@@ -13,7 +13,7 @@ def courses():
 
 @app.route('/colleges')
 def colleges():
-    return render_template('college.html', active_page='college')
+    return render_template('college.html', active_page='colleges')
 
 app.register_blueprint(student_bp, url_prefix='/students')
 

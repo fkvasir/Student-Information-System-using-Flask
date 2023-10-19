@@ -194,3 +194,14 @@ table thead tr{
 .table tbody tr:last-of-type{
     border-bottom: 2px solid #34AF6D;
 }
+.primary-button {
+    background-color: #007BFF;
+    color: #fff; 
+    padding: 10px 20px; 
+    border: none; 
+    border-radius: 4px; 
+    cursor: pointer;
+}
+.primary-button:hover, .primary-button:focus {
+    background-color: #0056b3; 
+}
