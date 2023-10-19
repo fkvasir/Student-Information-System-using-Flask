@@ -4,10 +4,36 @@
     <div class="college-list">
         <div class="college-header">
             <h1>Colleges</h1>
-            <div class="button-container">
-                <button class="primary-button" id="add-colleges-btn">Add</button>
-            </div>
+            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                Add
+            </button>
         </div>
+        
+            <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h1 class="modal-title fs-5" id="exampleModalLabel">ADD COLLEGE</h1>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            <form method="POST" action="/add_college">
+                                <div class="mb-3">
+                                    <label for="collegeCode" class="form-label">College Code</label>
+                                    <input type="text" class="form-control" id="collegeCode" name="collegeCode" required>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="collegeName" class="form-label">College Name</label>
+                                    <input type="text" class="form-control" id="collegeName" name="collegeName" required>
+                                </div>
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                <button type="submit" class="btn btn-primary">Save changes</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        
         <table class="table">
             <thead>
                 <tr>
@@ -17,25 +43,20 @@
                 </tr>
             </thead>
             <tbody>
+                {% for college in colleges_data %}
                 <tr>
-                    <td>CCS</td>
-                    <td>College of Computer Studies</td>
+                    <td>{{college['code']}}</td>
+                    <td>{{ college['name']}}</td>
                     <td>
                         <button class="custom-edit-button">Edit</button>
                         <button class="custom-delete-button">Delete</button>
                     </td>
                 </tr>
-                <tr>
-                    <td>CEBA</td>
-                    <td>College of Business and Accountancy</td>
-                    <td>
-                        <button class="custom-edit-button">Edit</button>
-                        <button class="custom-delete-button">Delete</button>
-                    </td>
-                </tr>
+                {% endfor%}
             </tbody>
         </table>
     </div>
 </section>
+
 {% endblock %}
 
