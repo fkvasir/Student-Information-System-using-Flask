@@ -2,9 +2,9 @@
 from flask import render_template, Blueprint
 from models.college_m import get_colleges
 
-colleges = Blueprint('colleges',__name__)
+colleges_bp = Blueprint('colleges',__name__)
 
-@colleges.route('/colleges')
+@colleges_bp.route('/colleges')
 def colleges_route():
     colleges_data = get_colleges()
     return render_template('colleges.html', active_page='colleges', colleges_data=colleges_data)
