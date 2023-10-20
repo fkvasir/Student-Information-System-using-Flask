@@ -50,10 +50,11 @@
                 </tr>
             </thead>
             <tbody>
+                {% for course in courses_data %}
                 <tr>
-                    <td>BSCS</td>
-                    <td>Bachelor of Science in Computer Science</td>
-                    <td>CCS</td>
+                    <td>{{ course['courseCode'] }}</td>
+                    <td>{{ course['courseName'] }}</td>
+                    <td>{{ course['college'] }}</td>
                     <td>
                         <button type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#editModal">
                             Edit
@@ -61,23 +62,9 @@
                         <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#deleteModal">
                             Delete
                         </button>
-
                     </td>
                 </tr>
-                <tr>
-                    <td>BSIT</td>
-                    <td>Bachelor of Science in Information Technology</td>
-                    <td>CCS</td>
-                    <td>
-                        <button type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#editModal">
-                            Edit
-                        </button>
-                        <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#deleteModal">
-                            Delete
-                        </button>
-
-                    </td>
-                </tr>
+                {% endfor %}
             </tbody>
         </table>
     </div>

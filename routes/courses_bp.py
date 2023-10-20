@@ -1,4 +1,3 @@
-# routes/courses_bp.py
 from flask import render_template, Blueprint
 from models.courses_m import get_courses
 

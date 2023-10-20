@@ -1,7 +1,7 @@
 {% set active_page = 'students'%}
 {% extends "layouts.html" %}
-{%block content%}
 
+{% block content %}
 <section class="student">
     <div class="student-list">
         <div class="students-header">
@@ -10,7 +10,6 @@
                 Add
             </button>
         </div>
-        
             <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                 <div class="modal-dialog">
                     <div class="modal-content">
@@ -51,7 +50,6 @@
                     </div>
                 </div>
             </div>
-        
         <table class="table">
             <thead>
                 <tr>
@@ -65,47 +63,14 @@
                 </tr>
             </thead>
                 <tbody>
+                    {% for student in students_data %}
                     <tr>
-                        <td>2021-****</td>
-                        <td>Fulgent Kvasir</td>
-                        <td>Lavesores</td>
-                        <td>BSCS</td>
-                        <td>3rd Year</td>
-                        <td>Male</td>
-                        <td>
-                            <button type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#editModal">
-                                Edit
-                            </button>
-                            <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#deleteModal">
-                                Delete
-                            </button>
-
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>2021-****</td>
-                        <td> Kvasir</td>
-                        <td>Lavesores</td>
-                        <td>BSIT</td>
-                        <td>4th Year</td>
-                        <td>Female</td>
-                        <td>
-                            <button type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#editModal">
-                                Edit
-                            </button>
-                            <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#deleteModal">
-                                Delete
-                            </button>
-
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>2021-****</td>
-                        <td> Kvasir</td>
-                        <td>Lavesores</td>
-                        <td>BSCpE</td>
-                        <td>4th Year</td>
-                        <td>Female</td>
+                        <td>{{ student['studentID'] }}</td>
+                        <td>{{ student['studentFname'] }}</td>
+                        <td>{{ student['studentLname'] }}</td>
+                        <td>{{ student['course'] }}</td>
+                        <td>{{ student['year'] }}</td>
+                        <td>{{ student['gender'] }}</td>
                         <td>
                             <button type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#editModal">
                                 Edit
@@ -115,6 +80,7 @@
                             </button>
                         </td>
                     </tr>
+                    {% endfor %}
                 </tbody>
         </table>    
     </div>
@@ -162,4 +128,4 @@
         </div>
     </div>
 </div>
-{% endblock content%}
+{% endblock content %}
