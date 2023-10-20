@@ -13,7 +13,7 @@
     <div class="sidebar">
         <div class="logo"></div>
         <ul class="menu">
-            <li class="{{ 'active' if active_page == 'student' else '' }}">
+            <li class="{{ 'active' if active_page == 'students' else '' }}">
                 <a href="{{ url_for("student.students") }}">
                     <i class="fa-solid fa-user"></i>
                     <span>Students</span>
@@ -52,7 +52,9 @@
             </div>
         </div>
         <section class="main">
+            
             {% block content %}{% endblock %}
+            
         </section> 
     </div>
     <div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="deleteModalLabel" aria-hidden="true">

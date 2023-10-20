@@ -2,7 +2,7 @@
 from flask import render_template, Blueprint
 from models.students_m import get_students
 
-students_bp = Blueprint('students',__name__)
+students_bp = Blueprint('students_bp',__name__)
 
 @students_bp.route('/students')
 def students_route():

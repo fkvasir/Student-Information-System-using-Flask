@@ -1,7 +1,7 @@
 {% set active_page = 'courses'%}
-
 {% extends "layouts.html" %}
 {% block content %}
+
 <section class="course">
     <div class="course-list">
         <div class="course-header">
@@ -19,7 +19,7 @@
                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
                         <div class="modal-body">
-                            <form method="POST" action="/add_college">
+                            <form method="POST" action="/add_courses">
                                 <div class="mb-3">
                                     <label for="collegeCode" class="form-label">Course Code</label>
                                     <input type="text" class="form-control" id="collegeCode" name="collegeCode" required>
