@@ -4,7 +4,7 @@ def get_students():
     conn = connect_to_database()
     cursor = conn.cursor(dictionary=True)
 
-    cursor.execute('SELECT * FROM students')
+    cursor.execute('SELECT * FROM student')
     students_data = cursor.fetchall()
 
     cursor.close()

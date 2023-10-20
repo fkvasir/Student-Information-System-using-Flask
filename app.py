@@ -1,4 +1,4 @@
-from flask import Flask, render_template, redirect, Blueprint
+from flask import Flask, render_template, redirect
 from routes.student_bp import students_bp
 from routes.college_bp import colleges_bp
 from routes.course_bp import courses_bp
@@ -7,13 +7,13 @@ from db.db_config import db_config
 
 app = Flask(__name__)
 
-def connect_to_database():
-    return mysql.connector.connect(**db_config)
 
 @app.route('/')
 def index():
     return redirect('/students')
 
+def connect_to_database():
+    return mysql.connector.connect(**db_config)
 
 app.register_blueprint(students_bp, url_prefix='/students')
 app.register_blueprint(courses_bp, url_prefix='/courses')
