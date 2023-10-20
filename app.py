@@ -1,5 +1,7 @@
 from flask import Flask, render_template, Blueprint, redirect
-from routes.student_bp import student_bp
+from routes.student_bp import students
+from routes.college_bp import colleges
+from routes.courses_bp import courses
 import mysql.connector
 from db.db_config import db_config
 
@@ -19,19 +21,10 @@ def index():
 def courses():
     return render_template('courses.html', active_page='courses')
 
-@app.route('/colleges')
-def colleges():
-    conn = connect_to_database()
-    cursor = conn.cursor(dictionary=True)
+app.register_blueprint(students, url_prefix='/students')
+app.register_blueprint(courses, url_prefix='/courses')
+app.register_blueprint(colleges, url_prefix='/colleges')
 
-    cursor.execute('SELECT * FROM college')
-    colleges_data = cursor.fetchall()
-    
-    cursor.close()
-    conn.close()
-    return render_template('college.html', active_page='colleges', colleges_data=colleges_data)
-
-app.register_blueprint(student_bp, url_prefix='/students')
 
 if __name__ == '__main__':
     app.run(debug=True)

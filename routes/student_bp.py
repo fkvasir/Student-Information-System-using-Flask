@@ -1,17 +1,10 @@
-from flask import Blueprint, render_template
+# routes/colleges.py
+from flask import render_template
+from models.students_m import get_students
 
-student_bp = Blueprint('student', __name__, template_folder='templates')
+app = Flask(__name__)
 
-@student_bp.route('/')
+@app.route('/students')
 def students():
-    return render_template('students.html', active_page='students')
-
-@student_bp.route('/colleges')
-def colleges():
-    return render_template('college.html', active_page='colleges')
-
-@student_bp.route('/courses')
-def courses():
-    return render_template('courses.html', active_page='courses')
-
-
+    students_data = get_students()
+    return render_template('students.html', active_page='students', students_data=students_data)
