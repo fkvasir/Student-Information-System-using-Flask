@@ -7,7 +7,7 @@ colleges_bp = Blueprint('colleges_bp', __name__, template_folder='templates')
 def colleges_default():
     return redirect(url_for('colleges_bp.colleges_route'))
 
-@colleges_bp.route('/colleges')
+@colleges_bp.route('/colleges-list')
 def colleges_route():
     colleges_data = get_colleges()
     return render_template('college.html', active_page='colleges', colleges_data=colleges_data)

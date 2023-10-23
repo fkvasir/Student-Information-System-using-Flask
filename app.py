@@ -13,7 +13,7 @@ def connect_to_database():
 # Set up routes
 app.register_blueprint(students_bp, url_prefix='/')
 app.register_blueprint(courses_bp, url_prefix='/')
-app.register_blueprint(colleges_bp, url_prefix='/')
+app.register_blueprint(colleges_bp, url_prefix='/colleges')
 
 # Index route
 @app.route('/')

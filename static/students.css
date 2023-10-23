@@ -194,6 +194,13 @@ table thead tr{
 .table tbody tr:last-of-type{
     border-bottom: 2px solid #34AF6D;
 }
+.button-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+}
+/* Primary Button--Add|Save */
 .primary-button {
     background-color: #007BFF;
     color: #fff; 
@@ -205,13 +212,6 @@ table thead tr{
     top: 0;
     right: 0;
 }
-.button-container {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 10px;
-}
-
 .primary-button:hover, .primary-button:focus {
     background-color: #0056b3; 
 }
@@ -222,6 +222,7 @@ table thead tr{
     justify-content: space-between;
     align-items: center;
 }
+/* Edit Button */
 .custom-edit-button {
     background-color: #ffc107;
     color: #000;
@@ -234,6 +235,7 @@ table thead tr{
 .custom-edit-button:hover {
     background-color: #c69502;
 }
+/* Delete Button */
 .custom-delete-button {
     background-color: #dc3545; 
     color: #fff; 
@@ -246,38 +248,44 @@ table thead tr{
 .custom-delete-button:hover {
     background-color: #a90a1a;
 }
+/* Modals */
 .modal {
-    display: none;
-    position: fixed;
-    z-index: 1;
-    left: 0;
-    top: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0, 0, 0, 0.4);
-}
 
-/* Modal dialog */
+}
 .modal-dialog {
-    background-color: #fff;
-    margin: 15% auto;
-    padding: 20px;
-    width: 50%;
-}
 
-/* Modal header */
+}
+.modal-content {
+
+}
 .modal-header {
-    padding: 10px;
-    background-color: #f2f2f2;
-}
 
-/* Modal close button */
-.close {
-    float: right;
-    cursor: pointer;
 }
+.modal-header h2{
 
-/* Modal body */
+}
 .modal-body {
-    padding: 10px;
+
+}
+.inputBox {
+
+}
+.inputBox .label{
+
+}
+.inputBox input{
+
+}
+/* Close Button */
+.custom-close-button {
+    background-color: #969696;
+    color: #000;
+    border: 1px solid #969696;
+    padding: 5px 10px; 
+    border-radius: 4px;
+    cursor: pointer;
+    font-weight: bold;
+}
+.custom-close-button:hover {
+    background-color: #686767;
 }
