@@ -246,3 +246,38 @@ table thead tr{
 .custom-delete-button:hover {
     background-color: #a90a1a;
 }
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.4);
+}
+
+/* Modal dialog */
+.modal-dialog {
+    background-color: #fff;
+    margin: 15% auto;
+    padding: 20px;
+    width: 50%;
+}
+
+/* Modal header */
+.modal-header {
+    padding: 10px;
+    background-color: #f2f2f2;
+}
+
+/* Modal close button */
+.close {
+    float: right;
+    cursor: pointer;
+}
+
+/* Modal body */
+.modal-body {
+    padding: 10px;
+}

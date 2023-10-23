@@ -2,48 +2,89 @@
 {% extends "layouts.html" %}
 
 {% block content %}
-<section class="student">
-    <div class="student-list">
-        <div class="students-header">
-            <h1>Students</h1>
-            <button type="button" class="primary-button" data-bs-toggle="modal" data-bs-target="#exampleModal">
-                Add
-            </button>
-        </div>
-        <table class="table">
-            <thead>
-                <tr>
-                    <th>ID</th>
-                    <th>First Name</th>
-                    <th>Last Name</th>
-                    <th>Course</th>
-                    <th>Year</th>
-                    <th>Gender</th>
-                    <th>Action</th>
-                </tr>
-            </thead>
-                <tbody>
-                    {% for student in students_data %}
+    <section class="student">
+        <div class="student-list">
+            <div class="students-header">
+                <h1>Students</h1>
+                <button type="button" class="primary-button" id="addButton">
+                    Add
+                </button>
+                
+            </div>
+            <table class="table">
+                <thead>
                     <tr>
-                        <td>{{ student['studentID'] }}</td>
-                        <td>{{ student['studentFname'] }}</td>
-                        <td>{{ student['studentLname'] }}</td>
-                        <td>{{ student['course'] }}</td>
-                        <td>{{ student['year'] }}</td>
-                        <td>{{ student['gender'] }}</td>
-                        <td>
-                            <button type="button" class="custom-edit-button" data-bs-toggle="modal" data-bs-target="#editModal">
-                                Edit
-                            </button>
-                            <button type="button" class="custom-delete-button" data-bs-toggle="modal" data-bs-target="#deleteModal">
-                                Delete
-                            </button>
-                        </td>
+                        <th>ID</th>
+                        <th>First Name</th>
+                        <th>Last Name</th>
+                        <th>Course</th>
+                        <th>Year</th>
+                        <th>Gender</th>
+                        <th>Action</th>
                     </tr>
-                    {% endfor %}
-                </tbody>
-        </table>    
+                </thead>
+                    <tbody>
+                        {% for student in students_data %}
+                        <tr>
+                            <td>{{ student['studentID'] }}</td>
+                            <td>{{ student['studentFname'] }}</td>
+                            <td>{{ student['studentLname'] }}</td>
+                            <td>{{ student['course'] }}</td>
+                            <td>{{ student['year'] }}</td>
+                            <td>{{ student['gender'] }}</td>
+                            <td>
+                                <button type="button" class="custom-edit-button" data-bs-toggle="modal" data-bs-target="#editModal">
+                                    Edit
+                                </button>
+                                <button type="button" class="custom-delete-button" data-bs-toggle="modal" data-bs-target="#deleteModal">
+                                    Delete
+                                </button>
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+            </table>    
+        </div>
+    </section>
+    <div id="addStudentModal" class="modal">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <span class="close" id="closeAddModal">&times;</span>
+                    <h2>Add Student</h2>
+                </div>
+                <div class="modal-body">
+                    <form id="addStudentForm">
+                        <div class="mb-3">
+                            <label for="studentID" class="form-label">Student ID</label>
+                            <input type="text" class="form-control" id="studentID" name="studentID" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="studentFname" class="form-label">First Name</label>
+                            <input type="text" class="form-control" id="studentFname" name="studentFname" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="studentLname" class="form-label">Last Name</label>
+                            <input type="text" class="form-control" id="studentLname" name="studentLname" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="course" class="form-label">Course</label>
+                            <input type="text" class="form-control" id="course" name="course" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="year" class="form-label">Year</label>
+                            <input type="text" class="form-control" id="year" name="year" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="gender" class="form-label">Gender</label>
+                            <input type="text" class="form-control" id="gender" name="gender" required>
+                        </div>
+                        <button type="button" class="custom-close-button" id="closeAddModal">Close</button>
+                        <button type="submit" class="custom-save-button">Save</button>
+                    </form>
+                </div>
+            </div>
+        </div>
     </div>
-</section>
 
-{% endblock content %}
+    {% endblock content %}
