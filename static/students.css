@@ -222,7 +222,7 @@ table thead tr{
     justify-content: space-between;
     align-items: center;
 }
-.btn btn-warning {
+.custom-edit-button {
     background-color: #ffc107;
     color: #000;
     border: 1px solid #ffc107;
@@ -231,7 +231,7 @@ table thead tr{
     cursor: pointer;
     font-weight: bold;
 }
-.btn btn-warning:hover {
+.custom-edit-button:hover {
     background-color: #c69502;
 }
 .custom-delete-button {

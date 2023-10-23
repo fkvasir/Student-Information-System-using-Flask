@@ -6,41 +6,12 @@
     <div class="course-list">
         <div class="course-header">
             <h1>Courses</h1>
-            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+            <button type="button" class="primary-button" data-bs-toggle="modal" data-bs-target="#exampleModal">
                 Add
             </button>
         </div>
         
-            <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                <div class="modal-dialog">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h1 class="modal-title fs-5" id="exampleModalLabel">ADD COURSES</h1>
-                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                        </div>
-                        <div class="modal-body">
-                            <form method="POST" action="/add_courses">
-                                <div class="mb-3">
-                                    <label for="collegeCode" class="form-label">Course Code</label>
-                                    <input type="text" class="form-control" id="collegeCode" name="collegeCode" required>
-                                </div>
-                                <div class="mb-3">
-                                    <label for="collegeName" class="form-label">Course Name</label>
-                                    <input type="text" class="form-control" id="collegeName" name="collegeName" required>
-                                </div>
-                                <div class="mb-3">
-                                    <label for="collegeName" class="form-label">College</label>
-                                    <input type="text" class="form-control" id="collegeName" name="collegeName" required>
-                                </div>
-                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                                <button type="submit" class="btn btn-primary">Save changes</button>
-                            </form>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        
-        <table class="table table-custom">
+        <table class="table">
             <thead>
                 <tr>
                     <th>Code</th>
@@ -56,10 +27,10 @@
                     <td>{{ course['courseName'] }}</td>
                     <td>{{ course['college'] }}</td>
                     <td>
-                        <button type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#editModal">
+                        <button type="button" class="custom-edit-button" data-bs-toggle="modal" data-bs-target="#editModal">
                             Edit
                         </button>
-                        <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#deleteModal">
+                        <button type="button" class="custom-delete-button" data-bs-toggle="modal" data-bs-target="#deleteModal">
                             Delete
                         </button>
                     </td>
@@ -69,35 +40,4 @@
         </table>
     </div>
 </section>
-<div class="modal fade" id="editModal" tabindex="-1" aria-labelledby="editModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="editModalLabel">EDIT COURSES</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-                <!-- Add form elements to edit data -->
-                <form id="editForm">
-                    <div class="mb-3">
-                        <label for="editCollegeCode" class="form-label">Course Code</label>
-                        <input type="text" class="form-control" id="editCollegeCode" name="editCollegeCode" required>
-                    </div>
-                    <div class="mb-3">
-                        <label for="editCollegeName" class="form-label">Course Name</label>
-                        <input type="text" class="form-control" id="editCollegeName" name="editCollegeName" required>
-                    </div>
-                    <div class="mb-3">
-                        <label for="editCollegeName" class="form-label">College</label>
-                        <input type="text" class="form-control" id="editCollegeName" name="editCollegeName" required>
-                    </div>
-                </form>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-warning" id="saveEditButton">Update</button>
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-            </div>
-        </div>
-    </div>
-</div>
 {% endblock %}

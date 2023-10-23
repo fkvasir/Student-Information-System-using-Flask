@@ -11,9 +11,9 @@ def connect_to_database():
     return mysql.connector.connect(**db_config)
 
 # Set up routes
-app.register_blueprint(students_bp, url_prefix='/students')
-app.register_blueprint(courses_bp, url_prefix='/courses')
-app.register_blueprint(colleges_bp, url_prefix='/colleges')
+app.register_blueprint(students_bp, url_prefix='/')
+app.register_blueprint(courses_bp, url_prefix='/')
+app.register_blueprint(colleges_bp, url_prefix='/')
 
 # Index route
 @app.route('/')

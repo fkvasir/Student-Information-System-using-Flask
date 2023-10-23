@@ -4,7 +4,7 @@ def get_courses():
     conn = connect_to_database()
     cursor = conn.cursor(dictionary=True)
 
-    cursor.execute('SELECT * FROM courses')
+    cursor.execute('SELECT * FROM course')
     courses_data = cursor.fetchall()
 
     cursor.close()
