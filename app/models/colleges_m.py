@@ -1,4 +1,4 @@
-from db.db_connection import connect_to_database
+from db.db_config import connect_to_database
 
 def get_colleges():
     conn = connect_to_database()

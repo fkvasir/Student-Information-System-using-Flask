@@ -1,0 +1,99 @@
+{% set active_page = 'courses'%}
+{% extends "layouts.html" %}
+{% block content %}
+
+    <section class="course">
+        <div class="course-list">
+            <div class="course-header">
+                <h1>Courses</h1>
+                <button type="button" class="primary-button" id="addButton">
+                    Add
+                </button>
+            </div>
+            
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>Code</th>
+                        <th>Name</th>
+                        <th>College</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for course in courses_data %}
+                    <tr>
+                        <td>{{ course['courseCode'] }}</td>
+                        <td>{{ course['courseName'] }}</td>
+                        <td>{{ course['college'] }}</td>
+                        <td>
+                            <button type="button" class="custom-edit-button" id="editButtonStudent">
+                                Edit
+                            </button>
+                            <button type="button" class="custom-delete-button" id="deleteButton">
+                                Delete
+                            </button>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </section>
+    <div id="addModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">    
+                <h2>Add Course</h2>
+            </div>
+                <div class="modal-body">
+                <form id="addCourseForm">
+                    <div class="inputBox">
+                        <input type="text" class="form-control" id="courseCode" name="courseCode" required>
+                        <label for="courseCode" class="form-label">Course Code</label>
+                    </div>
+                    <div class="inputBox">
+                        <input type="text" class="form-control" id="courseName" name="courseName" required>
+                        <label for="courseName" class="form-label">Course Name</label>
+                    </div>
+                    <div class="inputBox">
+                        <input type="text" class="form-control" id="college" name="college" required>
+                        <label for="college" class="form-label">College</label>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="submit" class="primary-button" id="saveBtnCourse">Save</button>
+                <button type="button" class="custom-close-button" id="closeBtn">Close</button>
+            </div>
+         </div>
+    </div>
+    <div id="editModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Edit Student</h2>
+            </div>
+            <div class="modal-body">
+                <form id="editStudentForm">
+                    <div class="inputBox">
+                        <input type="text" class="form-control" id="editcourseCode" name="courseCode" required>
+                        <label for="editcourseCode" class="form-label">Course Code</label>
+                    </div>
+                    <div class="inputBox">
+                        <input type="text" class="form-control" id="editcourseName" name="courseName" required>
+                        <label for="editcourseName" class="form-label">Course Name</label>
+                    </div>
+                    <div class="inputBox">
+                        <input type="text" class="form-control" id="editcollege" name="college" required>
+                        <label for="college" class="form-label">College</label>
+                    </div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="submit" class="primary-button" id="saveBtnEdit">Save</button>
+                <button type="button" class="custom-close-button" id="closeBtn">Close</button>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}

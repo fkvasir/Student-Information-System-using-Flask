@@ -150,6 +150,10 @@ body{
     border-radius: 10px;
     box-shadow: 0 20px 35px rgba(0, 0, 0, 0.1);
 }
+.students-header h2{
+    color: maroon;
+}
+
 .college{
     margin-top: 20px;
     text-transform: capitalize;
@@ -200,6 +204,7 @@ table thead tr{
     align-items: center;
     margin-bottom: 10px;
 }
+
 /* Primary Button--Add|Save */
 .primary-button {
     background-color: #007BFF;
@@ -248,34 +253,91 @@ table thead tr{
 .custom-delete-button:hover {
     background-color: #a90a1a;
 }
-/* Modals */
+/* Centered Modal */
 .modal {
-
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 2;
+    height: 100%;
+    width: 100%;
+    overflow: auto;
+    background: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center; /* Center horizontally */
+    align-items: center; /* Center vertically */
+    z-index: 1000; /* Adjust the z-index as needed */
 }
-.modal-dialog {
 
-}
 .modal-content {
-
+    background: #fff;
+    width: 30%;
+    margin-left: auto;
+    margin-right: auto;
+    padding: 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    border: 1px soli #686767;
+    border-radius: 6px;
+    z-index: 4px;
 }
+
 .modal-header {
-
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 0;
+    border-bottom: 1px solid #ccc;
 }
-.modal-header h2{
 
+.modal-header h2 {
+    font-size: 1.5rem;
+    color: #333;
+    margin: 0;
 }
 .modal-body {
-
+    padding: 20px 0;
 }
+.modal-footer{
+    padding: 2px 16px;
+    color: white;
+}
+
+/* Input Box */
 .inputBox {
-
+    position: relative;
+    border-bottom: 2px solid black;
+    margin: 10px;
 }
-.inputBox .label{
-
+.inputBox label {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    transform: translateY(0);
+    font-size: 1em;
+    color: black;
+    font-weight: 500;
+    pointer-events: none;
+    transition: .5s;
 }
-.inputBox input{
-
+.inputBox input:valid ~ label,
+.inputBox input:focus ~ label {
+    top: -10px;
+    font-size: 0.75em;
 }
+.inputBox input {
+    width: 100%;
+    padding: 15px 10px;
+    border: none;
+    outline: none;
+    font-size: 1em;
+    color: black;
+    font-weight: 800;
+    transition: 0.5s;
+}
+
 /* Close Button */
 .custom-close-button {
     background-color: #969696;

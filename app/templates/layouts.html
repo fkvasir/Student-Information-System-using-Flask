@@ -6,7 +6,7 @@
     <title>
         SSIS
     </title>
-    <link rel ="stylesheet" type="text/css" href="{{url_for('static', filename= 'students.css')}}">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/students.css') }}">
 </head>
 <body>
     <div class="sidebar">
@@ -24,7 +24,7 @@
                     <span>Courses</span></a>
             </li>
             <li class="{{ 'active' if active_page == 'colleges' else '' }}">
-                <a href="{{ url_for('colleges_bp.colleges_route') }}">
+                <a href="{{ url_for("colleges_bp.colleges_route") }}">
                     <i class="fa-solid fa-graduation-cap"></i>
                     <span>Colleges</span>
                 </a>
@@ -56,7 +56,8 @@
 
         </section> 
     </div>
-    <script src="{{ url_for('static', filename='script.js') }}"></script>
+
+    <script src="{{ url_for('static', filename='js/script.js') }}"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
 </body>
 <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>

@@ -1,0 +1,141 @@
+{% set active_page = 'students'%}
+{% extends "layouts.html" %}
+
+{% block content %}
+    <section class="student">
+        <div class="student-list">
+            <div class="students-header">
+                <h1>Students</h1>
+                <button type="button" class="primary-button" id="addButton">
+                    Add
+                </button>
+            </div>
+            
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>First Name</th>
+                        <th>Last Name</th>
+                        <th>Course</th>
+                        <th>Year</th>
+                        <th>Gender</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                    <tbody>
+                        {% for student in students_data %}
+                        <tr>
+                            <td>{{ student['studentID'] }}</td>
+                            <td>{{ student['studentFname'] }}</td>
+                            <td>{{ student['studentLname'] }}</td>
+                            <td>{{ student['course'] }}</td>
+                            <td>{{ student['year'] }}</td>
+                            <td>{{ student['gender'] }}</td>
+                            <td>
+                                <button type="button" class="custom-edit-button" id="editButtonStudent"
+                                        data-student-id="{{ student['studentID'] }}"
+                                        data-fname="{{ student['studentFname'] }}"
+                                        data-lname="{{ student['studentLname'] }}"
+                                        data-course="{{ student['course'] }}"
+                                        data-year="{{ student['year'] }}"
+                                        data-gender="{{ student['gender'] }}">
+                                    Edit
+                                </button>
+                                <button type="button" class="custom-delete-button" id="deleteButton" 
+                                        data-student-id="{{ student['studentID'] }}"
+                                        data-fname="{{ student['studentFname'] }}""
+                                        data-lname="{{ student['studentLname'] }}"
+                                        data-course="{{ student['course'] }}"
+                                        data-year="{{ student['year'] }}"
+                                        data-gender="{{ student['gender'] }}">
+                                    Delete
+                                </button>                                
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+            </table>    
+        </div>
+    </section>
+    <div id="addModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">    
+                <h2>Add Student</h2>
+            </div>
+                <div class="modal-body">
+                    <form id="addStudentForm">
+                        <div class="inputBox">
+                            <input type="text" class="form-control" id="studentID" name="studentID" required>
+                            <label for="studentID" class="form-label">Student ID</label>
+                        </div>
+                        <div class="inputBox">
+                            <input type="text" class="form-control" id="studentFname" name="studentFname" required>
+                            <label for="studentFname" class="form-label">First Name</label>
+                        </div>
+                        <div class="inputBox">
+                            <input type="text" class="form-control" id="studentLname" name="studentLname" required>
+                            <label for="studentLname" class="form-label">Last Name</label>
+                        </div>
+                        <div class="inputBox">
+                            <input type="text" class="form-control" id="course" name="course" required>
+                            <label for="course" class="form-label">Course</label>
+                        </div>
+                        <div class="inputBox">
+                            <input type="text" class="form-control" id="year" name="year" required>
+                            <label for="year" class="form-label">Year</label>
+                        </div>
+                        <div class="inputBox">
+                            <input type="text" class="form-control" id="gender" name="gender" required>
+                            <label for="gender" class="form-label">Gender</label>
+                        </div>
+                    </form>
+                </div>
+            <div class="modal-footer">
+                <button type="submit" class="primary-button" id="saveBtnStudent">Save</button>
+                 <button type="button" class="custom-close-button" id="closeBtn">Close</button>
+            </div>
+         </div>
+    </div>
+    <div id="editModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Edit Student</h2>
+            </div>
+            <div class="modal-body">
+                <form id="editStudentForm">
+                    <div class="inputBox">
+                        <input type="text" class="form-control" id="editStudentID" name="studentID" required>
+                        <label for="editStudentID" class="form-label">Student ID</label>
+                    </div>
+                    <div class="inputBox">
+                        <input type="text" class="form-control" id="editStudentFname" name="studentFname" required>
+                        <label for "editStudentFname" class="form-label">First Name</label>
+                    </div>
+                    <div class="inputBox">
+                        <input type="text" class="form-control" id="editStudentLname" name="studentLname" required>
+                        <label for="editStudentLname" class="form-label">Last Name</label>
+                    </div>
+                    <div class="inputBox">
+                        <input type="text" class="form-control" id="editcourse" name="course" required>
+                        <label for="editcourse" class="form-label">Course</label>
+                    </div>
+                    <div class="inputBox">
+                        <input type="text" class="form-control" id="edityear" name="year" required>
+                        <label for="edityear" class="form-label">Year</label>
+                    </div>
+                    <div class="inputBox">
+                        <input type="text" class="form-control" id="editgender" name="gender" required>
+                        <label for="editgender" class="form-label">Gender</label>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="submit" class="primary-button" id="saveBtnEdit">Save</button>
+                <button type="button" class="custom-close-button" id="closeEditModal">Close</button>
+            </div>
+        </div>
+    </div>
+        
+
+    {% endblock content %}
