@@ -12,23 +12,31 @@
     <div class="sidebar">
         <div class="logo"></div>
         <ul class="menu">
+
+
+
             <li class="{{ 'active' if active_page == 'students' else '' }}">
-                <a href="{{ url_for("students_bp.students_route") }}">
+                <a href="{{ url_for("students.show_students") }}">
                     <i class="fa-solid fa-user"></i>
                     <span>Students</span>
                 </a>
             </li>
+
             <li class="{{ 'active' if active_page == 'courses' else '' }}">
-                <a href="{{ url_for("courses_bp.courses_route") }}">
+                <a href="{{ url_for("courses.show_courses") }}">
                     <i class="fa-solid fa-bars"></i>
-                    <span>Courses</span></a>
+                    <span>Courses</span>
+                </a>
             </li>
+
             <li class="{{ 'active' if active_page == 'colleges' else '' }}">
-                <a href="{{ url_for("colleges_bp.colleges_route") }}">
+                <a href="{{ url_for("colleges.show_colleges") }}">
                     <i class="fa-solid fa-graduation-cap"></i>
                     <span>Colleges</span>
                 </a>
             </li>
+
+            
             <li class="logout">
                 <a href="#">
                     <i class="fas fa-sign-out-alt"></i>
