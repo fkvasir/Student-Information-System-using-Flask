@@ -42,10 +42,11 @@
                                         data-gender="{{ student['gender'] }}">
                                     Edit
                                 </button>
-                                <button type="button" class="custom-delete-button" data-student-id="{{ student.studentID }}">Delete</button>
-                                <button type="button" class="primary-button" onclick="showStudentProfile('{{ student[',studentID,']}}')">
+                                <button type="button" class="custom-studentdelete-button" data-student-id="{{ student.studentID }}">Delete</button>
+                                <button type="button" class="primary-button" onclick="showStudentProfile('{{ student[',studentID,'] }}')">
                                     Show Profile
-                                </button>                           
+                                </button>                                
+                                                                
                             </td>
                         </tr>
                         {% endfor %}

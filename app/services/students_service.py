@@ -36,6 +36,8 @@ def add_student(student_id, student_fname, student_lname, course, year, gender):
         if connection:
             connection.close()
 
+
+
 def delete_student(studentID):
     connection = mysql.connection
     cursor = connection.cursor()

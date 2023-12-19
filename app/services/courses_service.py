@@ -11,3 +11,38 @@ def get_all_courses():
     cursor.close()
 
     return courses_data
+
+def add_course(course_code, course_name, college):
+    try:
+        connection = mysql.connection
+        cursor = connection.cursor()
+
+        cursor.execute(
+            "INSERT INTO course (courseCode, courseName, college) VALUES (%s, %s, %s, %s, %s, %s)",
+            (course_code, course_name, college)
+        )
+
+        connection.commit()
+
+        cursor.close()
+
+        return True  
+
+    except Exception as e:
+        print(f"Error adding course: {e}")
+        return False  
+
+    finally:
+        if connection:
+            connection.close()
+            
+            
+            
+            
+            
+def delete_course(courseCode):
+    connection = mysql.connection
+    cursor = connection.cursor()
+    cursor.execute("DELETE FROM course WHERE courseCode = %s" , (courseCode,))
+    
+    connection.commit()
