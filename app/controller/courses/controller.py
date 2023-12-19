@@ -7,3 +7,7 @@ from . import courses
 def show_courses():
     courses_data = get_all_courses()
     return render_template('courses.html', courses_data=courses_data)
+
+@courses.route('/courses/add', methods=['GET'])
+def add_course_form():
+    return render_template('add_course.html')

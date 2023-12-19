@@ -6,9 +6,9 @@
         <div class="course-list">
             <div class="course-header">
                 <h1>Courses</h1>
-                <button type="button" class="primary-button" id="addButton">
-                    Add
-                </button>
+                <a href="{{ url_for('courses.add_course_form') }}">
+                    <button type="button" class="primary-button" id="addButton">Add</button>
+                </a>
             </div>
             
             <table class="table">

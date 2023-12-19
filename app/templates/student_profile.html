@@ -1,0 +1,16 @@
+{% extends "layouts.html" %}
+
+{% block content %}
+    <section class="student-profile">
+        <h1>Student Profile</h1>
+        <ul>
+            <li>ID: {{ student_data['studentID'] }}</li>
+            <li>First Name: {{ student_data['studentFname'] }}</li>
+            <li>Last Name: {{ student_data['studentLname'] }}</li>
+            <li>Course: {{ student_data['course'] }}</li>
+            <li>Year: {{ student_data['year'] }}</li>
+            <li>Gender: {{ student_data['gender'] }}</li>
+            
+        </ul>
+    </section>
+{% endblock %}

@@ -7,9 +7,9 @@
         <div class="college-list">
             <div class="college-header">
                 <h1>Colleges</h1>
-                <button type="button" class="primary-button" id="addButton">
-                    Add
-                </button>
+                <a href="{{ url_for('colleges.add_college_form') }}">
+                    <button type="button" class="primary-button" id="addButton">Add</button>
+                </a>
             </div>
 
             <table class="table">

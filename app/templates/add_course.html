@@ -1,0 +1,26 @@
+{% extends "layouts.html" %}
+
+{% block content %}
+  <h3>Courses</h3>
+  <h4>Add New Course</h4>
+
+  <form method="post" action="{{ url_for('courses.add_course_form') }}">
+    <!-- You can add additional form fields as needed -->
+    <label for="courseCode">Course Code:</label>
+    <input type="text" id="courseCode" name="courseCode" required>
+
+    <label for="courseName">Course Name:</label>
+    <input type="text" id="courseName" name="courseName" required>
+
+    <label for="college">College:</label>
+    <select id="college" name="college" required>
+    {% for college in colleges_data %}
+    <option value="{{ colleges.collegeCode }}">{{ colleges.collegeCode }}</option>
+    {% endfor %}
+    </select>
+
+
+
+    <button type="submit" class="primary-button">Add Student</button>
+  </form>
+{% endblock %}

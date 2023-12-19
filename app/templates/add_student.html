@@ -1,0 +1,45 @@
+{% extends "layouts.html" %}
+
+{% block content %}
+  <h3>Students</h3>
+
+  <!-- Display existing students data -->
+
+  <hr>
+
+  <h4>Add New Student</h4>
+
+  <form method="post" action="{{ url_for('students.add_student_form') }}">
+    <!-- You can add additional form fields as needed -->
+    <label for="studentID">Student ID:</label>
+    <input type="text" id="studentID" name="studentID" required>
+
+    <label for="studentFname">First Name:</label>
+    <input type="text" id="studentFname" name="studentFname" required>
+
+    <label for="studentLname">Last Name:</label>
+    <input type="text" id="studentLname" name="studentLname" required>
+
+    <label for="course">Course:</label>
+    <select id="course" name="course" required>
+
+      <!-- Add options dynamically based on available courses -->
+      {% for course in courses_data %}
+        <option value="{{ course.courseCode }}">{{ course.courseCode }}</option>
+      {% endfor %}
+    </select>
+
+    <label for="year">Year:</label>
+    <input type="text" id="year" name="year" required>
+
+    <label for="gender">Gender:</label>
+    <select id="gender" name="gender" required>
+      <option value="Male">Male</option>
+      <option value="Female">Female</option>
+      <option value="Others">Others</option>
+
+    </select>
+
+    <button type="submit" class="primary-button">Add Student</button>
+  </form>
+{% endblock %}

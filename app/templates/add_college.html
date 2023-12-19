@@ -1,0 +1,19 @@
+{% extends "layouts.html" %}
+
+{% block content %}
+  <h3>Colleges</h3>
+  <h4>Add New College</h4>
+
+  <form method="post" action="{{ url_for('courses.add_course_form') }}">
+    <!-- You can add additional form fields as needed -->
+    <label for="collegeCode">College Code:</label>
+    <input type="text" id="collegeCode" name="collegeCode" required>
+
+    <label for="collegeName">College Name:</label>
+    <input type="text" id="collegeName" name="collegeName" required>
+
+
+
+    <button type="submit" class="primary-button">Add Student</button>
+  </form>
+{% endblock %}

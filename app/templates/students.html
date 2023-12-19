@@ -6,9 +6,9 @@
         <div class="student-list">
             <div class="students-header">
                 <h1>Students</h1>
-                <button type="button" class="primary-button" id="addButton">
-                    Add
-                </button>
+                <a href="{{ url_for('students.add_student_form') }}">
+                    <button type="button" class="primary-button" id="addButton">Add</button>
+                </a>
             </div>
             
             <table class="table">
@@ -42,15 +42,10 @@
                                         data-gender="{{ student['gender'] }}">
                                     Edit
                                 </button>
-                                <button type="button" class="custom-delete-button" id="deleteButton" 
-                                        data-student-id="{{ student['studentID'] }}"
-                                        data-fname="{{ student['studentFname'] }}""
-                                        data-lname="{{ student['studentLname'] }}"
-                                        data-course="{{ student['course'] }}"
-                                        data-year="{{ student['year'] }}"
-                                        data-gender="{{ student['gender'] }}">
-                                    Delete
-                                </button>                                
+                                <button type="button" class="custom-delete-button" data-student-id="{{ student.studentID }}">Delete</button>
+                                <button type="button" class="primary-button" onclick="showStudentProfile('{{ student[',studentID,']}}')">
+                                    Show Profile
+                                </button>                           
                             </td>
                         </tr>
                         {% endfor %}
