@@ -37,9 +37,6 @@ def add_course(course_code, course_name, college):
             connection.close()
             
             
-            
-            
-            
 def delete_course(courseCode):
     connection = mysql.connection
     cursor = connection.cursor()

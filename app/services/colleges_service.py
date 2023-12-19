@@ -34,10 +34,7 @@ def add_college(college_code, college_name):
 
     finally:
         if connection:
-            connection.close()
-            
-            
-            
+            connection.close() 
             
 def delete_college(college_code):
     connection = mysql.connection
