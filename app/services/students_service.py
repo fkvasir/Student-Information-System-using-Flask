@@ -1,7 +1,7 @@
 from app import mysql
 
 def get_all_students():
-    connection = mysql.connection()
+    connection = mysql.connection
     cursor = connection.cursor(dictionary=True)
 
     cursor.execute("SELECT * FROM student")
