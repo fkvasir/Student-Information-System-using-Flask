@@ -380,3 +380,67 @@ table thead tr{
 .custom-close-button:hover {
     background-color: #686767;
 }
+.add-container {
+    max-width: 400px;
+    margin: 0 auto;
+    padding: 20px;
+  }
+  
+.add-container h2 {
+    text-align: center;
+  }
+  
+  form {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .label-containers {
+    margin-top: 20px;
+  }
+  
+  .label-containers label {
+    margin-bottom: 5px;
+  }
+  
+  .label-containers input, select {
+    padding: 8px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+  }
+  
+  .add-container button {
+    background-color: #4caf50;
+    color: white;
+    padding: 10px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+  
+  .add-container button:hover {
+    background-color: #45a049;
+  }
+.picture-upload {
+  display: flex;
+  justify-content: flex-end;
+  margin-bottom: 20px;
+}
+
+.picture-upload input[type="file"] {
+  display: none;
+}
+
+.picture-upload label {
+  background-color: #3498db;
+  color: white;
+  padding: 10px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.picture-upload label:hover {
+  background-color: #2980b9;
+}

@@ -14,7 +14,6 @@ document.addEventListener('DOMContentLoaded', function() {
           }
       });
   });
-
   function deleteStudent(studentID) {
       fetch('/students/delete/' + studentID, {
           method: 'DELETE',
@@ -92,7 +91,6 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         });
     });
-
     function deleteCollege(collegeCode) {
         fetch('/colleges/delete/' + collegeCode, {
             method: 'DELETE',
@@ -125,3 +123,50 @@ function showStudentProfile(studentID) {
     window.location.href = '/students/profile/' + studentID;
   }
   
+
+
+
+
+
+  
+document.addEventListener('DOMContentLoaded', function() {
+    var addCollegeButton = document.getElementById('addCollegeButton');
+    
+    addCollegeButton.addEventListener('click', function() {
+        var collegeCode = document.getElementById('collegeCode').value;
+        var collegeName = document.getElementById('collegeName').value;
+        var csrfToken = document.querySelector("meta[name='csrf_token']").content;
+        
+        var formData = new FormData();
+        formData.append('collegeCode', collegeCode);
+        formData.append('collegeName', collegeName);
+
+        fetch('/colleges/add', {
+            method: 'POST',
+            body: formData,
+            headers: {
+                "X-CSRFToken": csrfToken,
+            },
+        })
+        .then(response => {
+            // Log the full response for debugging
+            console.log(response);
+            return response.json();
+        })
+        .then(data => {
+            console.log(data);  // Log the entire data object
+            if (data.status === 'success') {
+                alert('College added successfully!');
+                window.location.href = "/colleges";
+            } else {
+                alert('Error adding college: ' + data.message);
+            }
+        }) 
+        .catch(error => {
+            console.error('Error adding college:', error);
+            alert('An error occurred while adding the college. Check the console for details.');
+        });
+    });
+});
+
+ 

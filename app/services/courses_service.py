@@ -18,7 +18,7 @@ def add_course(course_code, course_name, college):
         cursor = connection.cursor()
 
         cursor.execute(
-            "INSERT INTO course (courseCode, courseName, college) VALUES (%s, %s, %s, %s, %s, %s)",
+            "INSERT INTO course (courseCode, courseName, college) VALUES (%s, %s, %s)",
             (course_code, course_name, college)
         )
 
@@ -35,6 +35,7 @@ def add_course(course_code, course_name, college):
     finally:
         if connection:
             connection.close()
+
             
             
 def delete_course(courseCode):

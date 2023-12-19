@@ -1,19 +1,27 @@
 {% extends "layouts.html" %}
 
+
 {% block content %}
-  <h3>Colleges</h3>
-  <h4>Add New College</h4>
+<div class="add-form-container">
+  <h1>College</h1>
+  <hr>
+  <div class="add-container">
+    <h2><b>Add New College</b></h2>
 
-  <form method="post" action="{{ url_for('colleges.add_college_form') }}">
-    <!-- You can add additional form fields as needed -->
-    <label for="collegeCode">College Code:</label>
-    <input type="text" id="collegeCode" name="collegeCode" required>
-
-    <label for="collegeName">College Name:</label>
-    <input type="text" id="collegeName" name="collegeName" required>
+    <div class="label-containers">
+      <form method="post" action="{{ url_for('colleges.add_college_form') }}">
 
 
+        <label for="collegeCode">College Code:</label>
+        <input type="text" id="collegeCode" name="collegeCode" required>
 
-    <button type="submit" class="primary-button">Add College</button>
-  </form>
+        <label for="collegeName">College Name:</label>
+        <input type="text" id="collegeName" name="collegeName" required>
+
+
+        <button type="button" id="addCollegeButton">Add College</button>
+      </form>
+    </div>
+  </div>  
+</div>
 {% endblock %}

@@ -18,14 +18,15 @@ def add_college_form():
         college_code = request.form.get('collegeCode')
         college_name = request.form.get('collegeName')
         
-        
-        
-        add_college(college_code, college_name)
-        return redirect(url_for('colleges.show_colleges'))
-        
-        # return redirect('college.html')
+        try:
+            add_college(college_code, college_name)
+            return jsonify({'status': 'success', 'message': 'College added successfully!'})
+        except Exception as e:
+            print(f"Error adding college: {e}")
+            return jsonify({'status': 'error', 'message': str(e)})
 
     return render_template('add_college.html')
+
 
 
 

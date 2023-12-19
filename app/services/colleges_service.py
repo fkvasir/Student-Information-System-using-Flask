@@ -12,30 +12,27 @@ def get_all_colleges():
     return colleges_data
 
 
-def add_college(college_code, college_name):
-    try:
-        connection = mysql.connection
-        cursor = connection.cursor()
 
+def add_college(college_code, college_name):
+    connection = mysql.connection
+    cursor = connection.cursor()
+
+    try:
         cursor.execute(
             "INSERT INTO college (collegeCode, collegeName) VALUES (%s, %s)",
             (college_code, college_name)
         )
-
         connection.commit()
-
         cursor.close()
-
-        return True  
-
+        return True
     except Exception as e:
-        print(f"Error adding student: {e}")
-        return False  
-
+        print(f"Error adding college: {e}")
+        return False
     finally:
         if connection:
-            connection.close() 
+            connection.close()
             
+
 def delete_college(college_code):
     connection = mysql.connection
     cursor = connection.cursor()
