@@ -55,7 +55,7 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     });
     function deleteCourse(courseCode) {
-        fetch('/course/delete/' + courseCode, {
+        fetch('/courses/delete/' + courseCode, {
             method: 'DELETE',
             headers: {
                 "X-CSRFToken": document.querySelector("meta[name='csrf_token']").content,
@@ -73,6 +73,45 @@ document.addEventListener('DOMContentLoaded', function() {
         .catch(error => {
             console.error('Error:', error);
             alert('An error occurred while deleting the course. Check the console for details.');
+        });
+    }
+});
+document.addEventListener('DOMContentLoaded', function() {
+    var deleteButtons = document.querySelectorAll('.custom-collegedelete-button');
+  
+    deleteButtons.forEach(function(button) {
+        button.addEventListener('click', function() {
+            var collegeCode = this.getAttribute('data-college-code');
+  
+            var confirmation = window.confirm('Are you sure you want to delete ' + collegeCode + '?');
+  
+            if (confirmation) {
+  
+              deleteCollege(collegeCode);
+            } else {
+            }
+        });
+    });
+
+    function deleteCollege(collegeCode) {
+        fetch('/colleges/delete/' + collegeCode, {
+            method: 'DELETE',
+            headers: {
+                "X-CSRFToken": document.querySelector("meta[name='csrf_token']").content,
+            }
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.status === 'success') {
+                alert('College deleted successfully!');
+                window.location.reload();
+            } else {
+                alert('Error deleting college: ' + data.message);
+            }
+        })
+        .catch(error => {
+            console.error('Error:', error);
+            alert('An error occurred while deleting the college. Check the console for details.');
         });
     }
 });

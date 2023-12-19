@@ -15,7 +15,7 @@
     <label for="college">College:</label>
     <select id="college" name="college" required>
     {% for college in colleges_data %}
-    <option value="{{ colleges.collegeCode }}">{{ colleges.collegeCode }}</option>
+    <option value="{{ college.collegeCode }}">{{ college.collegeCode }}</option>
     {% endfor %}
     </select>
 

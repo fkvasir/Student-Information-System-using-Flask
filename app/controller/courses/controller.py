@@ -18,7 +18,7 @@ def add_course_form():
         college = request.form.get('college')
 
 
-        add_course(course_code, course_name,college )
+        add_course(course_code, course_name, college )
         return redirect(url_for('courses.show_courses'))
         
         # return redirect('courses.html')

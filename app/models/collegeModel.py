@@ -1,9 +1,14 @@
 from app import mysql
 
-class College(mysql.Model):
-    id = mysql.Column(mysql.Integer, primary_key=True)
-    collegeCode = mysql.Column(mysql.String(5), unique=True, nullable=False)
-    collegeName = mysql.Column(mysql.String(150), nullable=False)
+class College:
+    @staticmethod
+    def get_by_collegecode(college_code):
+        connection = mysql.connection
+        cursor = connection.cursor(dictionary=True)
 
-    def __repr__(self):
-        return f"<College {self.collegeCode}>"
+        query = "SELECT * FROM college WHERE collegeCode = %s"
+        cursor.execute(query, (college_code,))
+        college_data = cursor.fetchone()
+
+        cursor.close()
+        return college_data
