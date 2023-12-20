@@ -7,7 +7,7 @@
             <div class="students-header">
                 <h1>Students</h1>
                 <a href="{{ url_for('students.add_student_form') }}">
-                    <button type="button" class="primary-button" id="addButton">Add</button>
+                    <button type="button" class="primary-button" id="addButton"><i class="fa-solid fa-user-plus"></i></button>
                 </a>
             </div>
             
@@ -40,11 +40,11 @@
                                         data-course="{{ student['course'] }}"
                                         data-year="{{ student['year'] }}"
                                         data-gender="{{ student['gender'] }}">
-                                    Edit
+                                    <i class="fa-solid fa-pen"></i>
                                 </button>
-                                <button type="button" class="custom-studentdelete-button" data-student-id="{{ student.studentID }}">Delete</button>
+                                <button type="button" class="custom-studentdelete-button" data-student-id="{{ student.studentID }}"><i class="fa-solid fa-trash"></i></button>
                                 <button type="button" class="primary-button" onclick="showStudentProfile('{{ student[',studentID,'] }}')">
-                                    Show Profile
+                                    <i class="fa-solid fa-user"></i>
                                 </button>                                
                                                                 
                             </td>

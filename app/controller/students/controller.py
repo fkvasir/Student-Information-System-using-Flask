@@ -4,6 +4,7 @@ from app.services.students_service import get_all_students
 from . import students
 from app.services.students_service import add_student, delete_student
 from app.models.studentsModel import Student
+from app import mysql
 
 
 @students.route('/')
@@ -20,18 +21,27 @@ def show_students():
 def add_student_form():
     if request.method == 'POST':
         student_id = request.form.get('studentID')
-        first_name = request.form.get('studentFname')
-        last_name = request.form.get('studentLname')
+        student_fname = request.form.get('studentFname')
+        student_lname = request.form.get('studentLname')
         course = request.form.get('course')
         year = request.form.get('year')
         gender = request.form.get('gender')
-
-        add_student(student_id, first_name,last_name, course, year, gender )
-        return redirect(url_for('students.show_students'))
         
-        # return redirect('students.html')
+        try:
+            add_student(student_id, student_fname, student_lname, course, year, gender )
+            return jsonify({'status': 'success', 'message': 'Student added successfully!'})
+        except Exception as e:
+            print(f"Error adding student: {e}")
+            return jsonify({'status': 'error', 'message': str(e)})
 
-    return render_template('add_student.html')
+    connection = mysql.connection
+    cursor = connection.cursor(dictionary=True)
+    cursor.execute("SELECT * FROM course")
+    courses_data = cursor.fetchall()
+
+    return render_template('add_student.html', courses_data=courses_data)
+
+        
 
 
 

@@ -170,7 +170,6 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
 });
-
 document.addEventListener('DOMContentLoaded', function() {
     var addCourseButton = document.getElementById('addCourseButton');
     
@@ -210,6 +209,55 @@ document.addEventListener('DOMContentLoaded', function() {
             .catch(error => {
                 console.error('Error adding course:', error);
                 alert('An error occurred while adding the course. Check the console for details.');
+            });
+        });
+    }
+});
+document.addEventListener('DOMContentLoaded', function() {
+    var addStudentButton = document.getElementById('addStudentButton');
+    
+    if (addStudentButton) {
+        addStudentButton.addEventListener('click', function() {
+            var studentID = document.getElementById('studentID').value;
+            var studentLname = document.getElementById('studentLname').value;
+            var studentFname = document.getElementById('studentFname').value;
+            var course = document.getElementById('course').value;
+            var year = document.getElementById('year').value;
+            var gender = document.getElementById('gender').value;
+            var csrfToken = document.querySelector("meta[name='csrf_token']").content;
+            
+            var formData = new FormData();
+            formData.append('studentID', studentID);
+            formData.append('studentLname', studentLname);
+            formData.append('studentFname', studentFname);
+            formData.append('course', course);
+            formData.append('year', year);
+            formData.append('gender', gender);
+
+            fetch('/students/add', {
+                method: 'POST',
+                body: formData,
+                headers: {
+                    "X-CSRFToken": csrfToken,
+                },
+            })
+            .then(response => {
+
+                console.log(response);
+                return response.json();
+            })
+            .then(data => {
+                console.log(data);  
+                if (data.status === 'success') {
+                    alert('Student added successfully!');
+                    window.location.href = "/students";
+                } else {
+                    alert('Error adding student: ' + data.message);
+                }
+            }) 
+            .catch(error => {
+                console.error('Error adding course:', error);
+                alert('An error occurred while adding the student. Check the console for details.');
             });
         });
     }

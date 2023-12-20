@@ -24,8 +24,7 @@
 
         <label for="course">Course:</label>
         <select id="course" name="course" required>
-
-          <!-- Add options dynamically based on available courses -->
+         <!-- Add options dynamically based on available courses -->
           {% for course in courses_data %}
             <option value="{{ course.courseCode }}">{{ course.courseCode }}</option>
           {% endfor %}
@@ -42,7 +41,7 @@
 
         </select>
 
-        <button type="button" onclick="submitStudentForm()">Add Course</button>
+        <button type="button" id="addStudentButton">Add Student</button>
       </form>
     </div>
   </div>  

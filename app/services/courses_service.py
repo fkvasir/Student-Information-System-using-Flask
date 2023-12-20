@@ -22,12 +22,15 @@ def add_course(course_code, course_name, college):
             "INSERT INTO course (courseCode, courseName, college) VALUES (%s, %s, %s)",
             (course_code, course_name, college)
         )
+        
         connection.commit()
         cursor.close()
         return True
+    
     except Exception as e:
         print(f"Error adding course: {e}")
         return False
+    
     finally:
         if connection:
             connection.close()

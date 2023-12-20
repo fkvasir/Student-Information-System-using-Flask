@@ -8,7 +8,7 @@
             <div class="college-header">
                 <h1>Colleges</h1>
                 <a href="{{ url_for('colleges.add_college_form') }}">
-                    <button type="button" class="primary-button" id="addButton">Add</button>
+                    <button type="button" class="primary-button" id="addButton"><i class="fa-regular fa-square-plus"></i></button>
                 </a>
             </div>
 
@@ -27,9 +27,11 @@
                         <td>{{ college['collegeName'] }}</td>
                         <td>
                             <button type="button" class="custom-edit-button" id="editButton">
-                                Edit
+                                <i class="fa-solid fa-pen"></i>
                             </button>
-                            <button type="button" class="custom-collegedelete-button" data-college-code="{{ college.collegeCode }}">Delete</button>
+                            <button type="button" class="custom-collegedelete-button" data-college-code="{{ college.collegeCode }}">
+                                <i class="fa-solid fa-trash"></i>
+                            </button>
 
                         </td>
                     </tr>

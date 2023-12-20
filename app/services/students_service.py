@@ -23,9 +23,7 @@ def add_student(student_id, student_fname, student_lname, course, year, gender):
         )
 
         connection.commit()
-
         cursor.close()
-
         return True  
 
     except Exception as e:
