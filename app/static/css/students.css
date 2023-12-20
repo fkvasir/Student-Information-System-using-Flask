@@ -392,7 +392,7 @@ table thead tr{
 .custom-close-button:hover {
     background-color: #686767;
 }
-/* For Cloudinary */
+/* For Add_Forms && Cloudinary */
 .add-container {
     max-width: 400px;
     margin: 0 auto;
@@ -457,3 +457,97 @@ table thead tr{
 .picture-upload label:hover {
   background-color: #2980b9;
 }
+
+/* PROFILE CARD/PAGE  */
+.student-profile {
+    display: flex;
+    justify-content: center;
+    align-items: center; 
+    height: 100vh;
+    background-color: #f2f2f2;
+}
+.profile--wrapper {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 100%;
+    transform: translate(-50%, -50%);
+    width: 1200px;
+    height: 700px;
+    display: flex;
+    box-shadow: 0 1px 20px 0 rgba(69, 90, 100, 0.08);
+}
+.profile--wrapper .left {
+    width: 35%;
+    background: linear-gradient(to right, #ac0101, #df01019d);
+    padding: 30px 35px;
+    border-top-left-radius: 5px;
+    border-bottom-left-radius: 5px;
+    text-align: center;
+    color: #fff;
+}
+.profile--wrapper .left img {
+    margin-bottom: 20px;
+    border-radius: 5px;
+    height: 500px;
+}
+.profile--wrapper .left img:hover {
+    transform: scale(1.05);
+    transition: transform 0.3s ease;
+}
+
+.profile--wrapper .left h4 {
+    margin-bottom: 20px;
+    font-size: 20px;
+}
+.profile--wrapper p {
+    font-size: 18px;
+}
+.profile--wrapper .right {
+    width: 65%;
+    background: #fff;
+    border-top-right-radius: 5px;
+    border-bottom-right-radius: 5px;
+    padding: 30px 25px;
+}
+.profile--wrapper .right .info,
+.profile--wrapper .right .other--info {
+    margin-bottom: 180px;
+}
+.profile--wrapper .right .info h2{
+    font-size: 29px;
+}
+.profile--wrapper .right .info h3,
+.profile--wrapper .right .other--info h3{
+    margin-bottom: 15px;
+    padding-bottom: 5px;
+    border-bottom: 1px solid #e0e0e0;
+    color: #353c4e;
+    text-transform: uppercase;
+    letter-spacing: 5px;
+    font-size: 25px;
+}
+.profile--wrapper .right .info--data,
+.profile--wrapper .right .other--data {
+    display: flex;
+    justify-content: space-between;
+}
+.profile--wrapper .right .info--data .data,
+.profile--wrapper .right .other--data .data{
+    width: 45%;
+}
+.profile--wrapper .right .info--data .data h4,
+.profile--wrapper .right .other--data .data h4{
+    color: #323846;
+    margin-bottom: 5px;
+    font-size: 20px;
+}
+.profile--wrapper .right .info--data .data p,
+.profile--wrapper .right .other--data .data p{
+    font-size: 18px;
+    margin-bottom: 10px;
+    color: #798088;
+}
+
+
+ 

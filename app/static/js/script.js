@@ -5,7 +5,7 @@ document.addEventListener('DOMContentLoaded', function() {
       button.addEventListener('click', function() {
           var studentID = this.getAttribute('data-student-id');
 
-          var confirmation = window.confirm('Are you sure you want to delete ' + studentID + '?');
+          var confirmation = window.confirm('\nAre you sure you want to delete ' + studentID + '?');
 
           if (confirmation) {
 
@@ -44,7 +44,7 @@ document.addEventListener('DOMContentLoaded', function() {
         button.addEventListener('click', function() {
             var courseCode = this.getAttribute('data-course-code');
   
-            var confirmation = window.confirm('Are you sure you want to delete ' + courseCode + '?');
+            var confirmation = window.confirm('\nDeleting this course will delete some students that are enrolled in this course.\n\n\nAre you sure you want to delete ' + courseCode + '?');
   
             if (confirmation) {
   
@@ -82,7 +82,7 @@ document.addEventListener('DOMContentLoaded', function() {
         button.addEventListener('click', function() {
             var collegeCode = this.getAttribute('data-college-code');
   
-            var confirmation = window.confirm('Are you sure you want to delete ' + collegeCode + '?');
+            var confirmation = window.confirm('\nDeleting this college will cause some courses and students in this college to be also deleted.\n\n\n Are you sure you want to delete ' + collegeCode + '?');
   
             if (confirmation) {
   
