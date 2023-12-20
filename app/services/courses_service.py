@@ -12,26 +12,22 @@ def get_all_courses():
 
     return courses_data
 
-def add_course(course_code, course_name, college):
-    try:
-        connection = mysql.connection
-        cursor = connection.cursor()
 
+def add_course(course_code, course_name, college):
+    connection = mysql.connection
+    cursor = connection.cursor()
+
+    try:
         cursor.execute(
             "INSERT INTO course (courseCode, courseName, college) VALUES (%s, %s, %s)",
             (course_code, course_name, college)
         )
-
         connection.commit()
-
         cursor.close()
-
-        return True  
-
+        return True
     except Exception as e:
         print(f"Error adding course: {e}")
-        return False  
-
+        return False
     finally:
         if connection:
             connection.close()

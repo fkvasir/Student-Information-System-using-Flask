@@ -132,41 +132,87 @@ function showStudentProfile(studentID) {
 document.addEventListener('DOMContentLoaded', function() {
     var addCollegeButton = document.getElementById('addCollegeButton');
     
-    addCollegeButton.addEventListener('click', function() {
-        var collegeCode = document.getElementById('collegeCode').value;
-        var collegeName = document.getElementById('collegeName').value;
-        var csrfToken = document.querySelector("meta[name='csrf_token']").content;
-        
-        var formData = new FormData();
-        formData.append('collegeCode', collegeCode);
-        formData.append('collegeName', collegeName);
+    if (addCollegeButton) {
+            addCollegeButton.addEventListener('click', function() {
+            var collegeCode = document.getElementById('collegeCode').value;
+            var collegeName = document.getElementById('collegeName').value;
+            var csrfToken = document.querySelector("meta[name='csrf_token']").content;
+            
+            var formData = new FormData();
+            formData.append('collegeCode', collegeCode);
+            formData.append('collegeName', collegeName);
 
-        fetch('/colleges/add', {
-            method: 'POST',
-            body: formData,
-            headers: {
-                "X-CSRFToken": csrfToken,
-            },
-        })
-        .then(response => {
-            // Log the full response for debugging
-            console.log(response);
-            return response.json();
-        })
-        .then(data => {
-            console.log(data);  // Log the entire data object
-            if (data.status === 'success') {
-                alert('College added successfully!');
-                window.location.href = "/colleges";
-            } else {
-                alert('Error adding college: ' + data.message);
-            }
-        }) 
-        .catch(error => {
-            console.error('Error adding college:', error);
-            alert('An error occurred while adding the college. Check the console for details.');
+            fetch('/colleges/add', {
+                method: 'POST',
+                body: formData,
+                headers: {
+                    "X-CSRFToken": csrfToken,
+                },
+            })
+            .then(response => {
+                // Log the full response for debugging
+                console.log(response);
+                return response.json();
+            })
+            .then(data => {
+                console.log(data);  
+                if (data.status === 'success') {
+                    alert('College added successfully!');
+                    window.location.href = "/colleges";
+                } else {
+                    alert('Error adding college: ' + data.message);
+                }
+            }) 
+            .catch(error => {
+                console.error('Error adding college:', error);
+                alert('An error occurred while adding the college. Check the console for details.');
+            });
         });
-    });
+    }
+});
+
+document.addEventListener('DOMContentLoaded', function() {
+    var addCourseButton = document.getElementById('addCourseButton');
+    
+    if (addCourseButton) {
+        addCourseButton.addEventListener('click', function() {
+            var courseCode = document.getElementById('courseCode').value;
+            var courseName = document.getElementById('courseName').value;
+            var college = document.getElementById('college').value;
+            var csrfToken = document.querySelector("meta[name='csrf_token']").content;
+            
+            var formData = new FormData();
+            formData.append('courseCode', courseCode);
+            formData.append('courseName', courseName);
+            formData.append('college', college);
+
+            fetch('/courses/add', {
+                method: 'POST',
+                body: formData,
+                headers: {
+                    "X-CSRFToken": csrfToken,
+                },
+            })
+            .then(response => {
+
+                console.log(response);
+                return response.json();
+            })
+            .then(data => {
+                console.log(data);  
+                if (data.status === 'success') {
+                    alert('Course added successfully!');
+                    window.location.href = "/courses";
+                } else {
+                    alert('Error adding college: ' + data.message);
+                }
+            }) 
+            .catch(error => {
+                console.error('Error adding course:', error);
+                alert('An error occurred while adding the course. Check the console for details.');
+            });
+        });
+    }
 });
 
  

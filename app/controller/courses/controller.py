@@ -3,6 +3,7 @@ from flask import render_template, redirect, request, url_for, jsonify, flash
 from app.services.courses_service import get_all_courses, add_course, delete_course
 from . import courses
 from app.models.coursesModel import Course
+from app import mysql
 
 
 @courses.route('/courses')
@@ -16,14 +17,24 @@ def add_course_form():
         course_code = request.form.get('courseCode')
         course_name = request.form.get('courseName')
         college = request.form.get('college')
-
-
-        add_course(course_code, course_name, college )
-        return redirect(url_for('courses.show_courses'))
         
-        # return redirect('courses.html')
+        print(f"Received data: Course Code - {course_code}, Course Name - {course_name}, College - {college}")
+        
+        try:
+            add_course(course_code, course_name, college)
+            return jsonify({'status': 'success', 'message': 'Course added successfully!'})
+        except Exception as e:
+            print(f"Error adding course: {e}")
+            return jsonify({'status': 'error', 'message': str(e)})
 
-    return render_template('add_course.html')
+    connection = mysql.connection
+    cursor = connection.cursor(dictionary=True)
+    cursor.execute("SELECT * FROM college")
+    colleges_data = cursor.fetchall()
+
+    return render_template('add_course.html', colleges_data=colleges_data)
+
+
 
 
 

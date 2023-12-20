@@ -18,13 +18,13 @@
 
         <label for="college">College:</label>
         <select id="college" name="college" required>
-          {% for college in colleges_data %}
-            <option value="{{ college.collegeCode }}">{{ college.collegeCode }}</option>
-          {% endfor %}
+            {% for college in colleges_data %}
+                <option value="{{ college.collegeCode }}">{{ college.collegeCode }}</option>
+            {% endfor %}
         </select>
         
 
-        <button type="button" onclick="submitCourseForm()">Add Course</button>      
+        <button type="button" id="addCourseButton">Add Course</button>
       </form>
     </div>
   </div>  

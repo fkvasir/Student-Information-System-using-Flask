@@ -18,21 +18,21 @@
 
             <li class="{{ 'active' if active_page == 'students' else '' }}">
                 <a href="{{ url_for("students.show_students") }}">
-                    <i class="fa-solid fa-user"></i>
+                    <i class="fa-solid fa-user-graduate"></i>
                     <span>Students</span>
                 </a>
             </li>
 
             <li class="{{ 'active' if active_page == 'courses' else '' }}">
                 <a href="{{ url_for("courses.show_courses") }}">
-                    <i class="fa-solid fa-bars"></i>
+                    <i class="fa-brands fa-readme"></i>
                     <span>Courses</span>
                 </a>
             </li>
 
             <li class="{{ 'active' if active_page == 'colleges' else '' }}">
                 <a href="{{ url_for("colleges.show_colleges") }}">
-                    <i class="fa-solid fa-graduation-cap"></i>
+                    <i class="fa-solid fa-school"></i>
                     <span>Colleges</span>
                 </a>
             </li>
