@@ -1,16 +1,64 @@
 {% extends "layouts.html" %}
 
 {% block content %}
-    <section class="student-profile">
-        <h1>Student Profile</h1>
-        <ul>
-            <li>ID: {{ student_data['studentID'] }}</li>
-            <li>First Name: {{ student_data['studentFname'] }}</li>
-            <li>Last Name: {{ student_data['studentLname'] }}</li>
-            <li>Course: {{ student_data['course'] }}</li>
-            <li>Year: {{ student_data['year'] }}</li>
-            <li>Gender: {{ student_data['gender'] }}</li>
-            
-        </ul>
-    </section>
+<style>
+    @import url('https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@100&family=Roboto:wght@500&display=swap');
+</style>
+
+<section class="student-profile">
+    <div class="profile--wrapper">
+        <div class="left">
+            <img src="{{ url_for('static', filename='images/mahoraga.jpg')}}" alt="user--pic">
+            <div class="profile--name">
+                <h4><b>Student ID: {{ student_data['studentID'] }}</b></h4>
+                <p>STUDENT</p>
+            </div>
+        </div>
+        <div class="right">
+
+            <div class="info">
+                <h2><b>ABOUT</b></h2>
+                <h3>Information</h3>
+                <div class="info--data">
+                    <div class="data">
+                        <h4>First Name</h4>
+                        <p>{{ student_data['studentFname'] }}</p>
+                    </div>
+                    <div class="data">
+                        <h4>Last Name</h4>
+                        <p>{{ student_data['studentLname'] }}</p>
+                    </div>
+                </div>
+            </div>
+            <div class="other--info">
+                <h3>Other</h3>
+                <div class="other--data">
+                    <div class="data">
+                        <h4>Course</h4>
+                        <p>{{ student_data['course'] }}</p>
+                    </div>
+                    <div class="data">
+                        <h4>College</h4>
+                        {% if student_data['collegeCode'] %}
+                            <p>{{ student_data['collegeCode'] }}</p>
+                        {% else %}
+                            <p>No College</p>
+                        {% endif %}
+                      </div>                    
+                                                       
+                    <div class="data">
+                        <h4>Year</h4>
+                        <p>{{ student_data['year'] }}</p>
+                    </div>
+                    <div class="data">
+                        <h4>Gender</h4>
+                        <p>{{ student_data['gender'] }}</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+
 {% endblock %}
