@@ -2,7 +2,7 @@
 from flask import render_template, redirect, request, url_for, jsonify, flash
 from app.services.students_service import get_all_students
 from . import students
-from app.services.students_service import add_student, delete_student
+from app.services.students_service import add_student, delete_student, update_student
 from app.models.studentsModel import Student
 from app import mysql
 
@@ -57,8 +57,32 @@ def delete_student_route(studentID):
     return jsonify(response)
 
 
+
 @students.route('/students/profile/<string:studentID>')
 def show_student_profile(studentID):
-    student_data = Student.get_by_id(studentID)
+    student_data_with_college = Student.get_with_college_by_id(studentID)
+    print(student_data_with_college)
+    return render_template('student_profile.html', student_data=student_data_with_college, college_data=student_data_with_college)
 
-    return render_template('student_profile.html', student_data=student_data)
+
+@students.route('/students/update', methods=['POST'])
+def update_student_route():
+    try:
+        student_id = request.json.get('editStudentId')
+        student_fname = request.json.get('editStudentFName')
+        student_lname = request.json.get('editStudentLName')
+        course = request.json.get('editCourse')
+        year = request.json.get('editYear')
+        gender = request.json.get('editGender')
+
+        print('Received data:', student_id, student_fname, student_lname, course, year, gender)
+
+        success = update_student(student_id, student_fname, student_lname, course, year, gender)
+
+        if success:
+            return jsonify({'message': 'Student updated successfully'}), 200
+        else:
+            return jsonify({'error': 'Error updating student'}), 500
+    except Exception as e:
+        print('Error:', e)
+        return jsonify({'error': 'An error occurred. Please try again.'}), 500

@@ -54,5 +54,45 @@
             </table>    
         </div>
     </section>
+    <div id="editStudentModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Edit Student - <span id="studentIDHeading"></span></h2>
+                <span class="close" id="closeEditStudentModal">&times;</span>
+            </div>
+                <div class="modal-body">
+                    <form id="editForm" method="post" action="{{ url_for('students.update_student_route') }}">
+                        <div class="inputBox">
+                            <input type="text" id="editStudentId" name="editStudentId" value="{{studentID }}" required>
+                            <label for="editStudentId">Student ID:</label>
+                        </div>
+                        <div class="inputBox">
+                            <input type="text" id="editStudentFName" name="editStudentFName" value="{{studentFname }}" required>
+                            <label for="editStudentFName">First Name:</label>
+                        </div>
+                        <div class="inputBox">
+                            <input type="text" id="editStudentLName" name="editStudentLName" value="{{studentLname }}" required>
+                            <label for="editStudentLName">Last Name:</label>
+                        </div>
+                        <div class="inputBox">
+                            <input type="text" id="editCourse" name="editCourse" value="{{course }}" required>
+                            <label for="editCourse">Course:</label>
+                        </div>
+                        <div class="inputBox">
+                            <input type="text" id="editYear" name="editYear" value="{{year }}" required>
+                            <label for="editYear">Year:</label>
+                        </div>
+                        <div class="inputBox">
+                            <input type="text" id="editGender" name="editGender" value="{{gender }}" required>
+                            <label for="editGender">Gender:</label>
+                        </div>
+                    
+                        <div class="modal-footer">
+                            <button type="submit" class="primary-button" id="updateStudentButton">Save Changes</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
 
     {% endblock content %}

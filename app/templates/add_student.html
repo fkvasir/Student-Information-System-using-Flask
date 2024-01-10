@@ -8,11 +8,11 @@
     <h2><b>Add New Student</b></h2>
     <div class="picture-upload">
       <label for="upload">Upload Picture</label>
-      <input type="file" id="upload" name="upload">
+      <input type="file" id="upload" name="upload" accept="image/*" onchange="displayFileName()"> 
+      <p id="file-name"></p> 
     </div>
     <div class="label-containers">
-      <form method="post" action="{{ url_for('students.add_student_form') }}">
-        <!-- You can add additional form fields as needed -->
+      <form method="post" action="{{ url_for('students.add_student_form') }}" enctype="multipart/form-data">
         <label for="studentID">Student ID:</label>
         <input type="text" id="studentID" name="studentID" required>
 
@@ -24,15 +24,19 @@
 
         <label for="course">Course:</label>
         <select id="course" name="course" required>
-         <!-- Add options dynamically based on available courses -->
           {% for course in courses_data %}
             <option value="{{ course.courseCode }}">{{ course.courseCode }}</option>
           {% endfor %}
         </select>
 
         <label for="year">Year:</label>
-        <input type="text" id="year" name="year" required>
-
+        <select id="year" name="year" required>
+          <option value="1st Year">1st Year</option>
+          <option value="2nd Year">2nd Year</option>
+          <option value="3rd Year">3rd Year</option>
+          <option value="4th Year">4th Year</option>
+        </select>
+        
         <label for="gender">Gender:</label>
         <select id="gender" name="gender" required>
           <option value="Male">Male</option>
@@ -46,4 +50,13 @@
     </div>
   </div>  
 </div> 
+<script>
+  function displayFileName() {
+    const uploadInput = document.getElementById('upload');
+    const fileNameDisplay = document.getElementById('file-name');
+
+    fileNameDisplay.innerText = uploadInput.files.length > 0 ? `File Name: ${uploadInput.files[0].name}` : '';
+  }
+</script>
+
 {% endblock %}

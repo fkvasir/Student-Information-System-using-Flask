@@ -21,26 +21,49 @@
                     </tr>
                 </thead>
                 <tbody>
-                    {% for college in colleges_data %}
+                    {% for college in college_data %}
                     <tr>
-                        <td>{{ college['collegeCode'] }}</td>
-                        <td>{{ college['collegeName'] }}</td>
+                        <td>{{ college.collegeCode }}</td>
+                        <td>{{ college.collegeName }}</td>
                         <td>
-                            <button type="button" class="custom-edit-button" id="editButton">
+                            <button type="button" class="custom-edit-button" data-college-code="{{ college.collegeCode }}" data-college-name="{{ college.collegeName }}">
                                 <i class="fa-solid fa-pen"></i>
-                            </button>
+                            </button>                            
                             <button type="button" class="custom-collegedelete-button" data-college-code="{{ college.collegeCode }}">
                                 <i class="fa-solid fa-trash"></i>
                             </button>
-
                         </td>
                     </tr>
                     {% endfor %}
                 </tbody>
             </table>
         </div>
-    </section>
+    </section>  
 
-
+    <div id="editCollegeModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Edit College - <span id="collegeCodeHeading"></span></h2>
+                <span class="close" id="closeEditCollegeModal">&times;</span>
+            </div>
+                <div class="modal-body">
+                    <form id="editForm" method="post" action="{{ url_for('colleges.update_college_route') }}">
+                        <div class="inputBox">
+                            <input type="text" id="editCollegeCode" name="editCollegeCode" value="{{collegeCode }}" required>
+                            <label for="editCollegeCode">College Code:</label>
+                        </div>
+                        <div class="inputBox">
+                            <input type="text" id="editCollegeName" name="editCollegeName" value="{{collegeName }}" required>
+                            <label for="editCollegeName">College Name:</label>
+                        </div>
+                    
+                        <div class="modal-footer">
+                            <button type="submit" class="primary-button" id="updateCollegeButton">Save Changes</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    
 
 {% endblock %}

@@ -7,8 +7,12 @@ class College:
         cursor = connection.cursor(dictionary=True)
 
         query = "SELECT * FROM college WHERE collegeName = %s"
-        cursor.execute(query, (college_name,))
+        cursor.execute(query, (college_name))
         college_data = cursor.fetchone()
 
         cursor.close()
         return college_data
+    
+    
+
+        

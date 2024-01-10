@@ -3,12 +3,15 @@
 {% block content %}
 <style>
     @import url('https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@100&family=Roboto:wght@500&display=swap');
+    
 </style>
 
 <section class="student-profile">
     <div class="profile--wrapper">
         <div class="left">
-            <img src="{{ url_for('static', filename='images/mahoraga.jpg')}}" alt="user--pic">
+            <img src="https://res.cloudinary.com/dtounqe2m/image/upload/v1703271588/webssis/default-pic.jpg" alt="user--pic" id="profile-image">
+            <div class="dark-overlay"></div>
+            <button class="edit-button" onclick="openFileInput()"><i class="fa-solid fa-pen"></i></button>
             <div class="profile--name">
                 <h4><b>Student ID: {{ student_data['studentID'] }}</b></h4>
                 <p>STUDENT</p>
@@ -59,6 +62,13 @@
         </div>
     </div>
 </section>
+<script>
+    function openFileInput() {
+        document.getElementById('file-input').click();
+    }
+</script>
+
+<input type="file" id="file-input" style="display: none" accept="image/*">
 
 
 {% endblock %}

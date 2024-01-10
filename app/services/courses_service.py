@@ -43,3 +43,31 @@ def delete_course(courseCode):
     cursor.execute("DELETE FROM course WHERE courseCode = %s" , (courseCode,))
     
     connection.commit()
+
+
+
+
+
+
+
+def update_course(course_code, course_name, college):
+    connection = mysql.connection
+    cursor = connection.cursor()
+
+    try:
+        print('Updating course:', course_code, course_name, college)
+        query = "UPDATE course SET courseCode = %s WHERE courseName = %s AND college = %s"
+        print('Query:', query)
+        cursor.execute(query, (course_code, course_name, college))
+        connection.commit()
+        return True
+    
+    except Exception as e:
+        print(f"Error updating course: {str(e)}")
+        connection.rollback()
+        return False
+    
+    finally:
+        cursor.close()
+
+    

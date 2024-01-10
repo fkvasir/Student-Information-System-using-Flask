@@ -263,4 +263,245 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 });
 
- 
+
+
+
+
+
+
+// EDIT -- Colleges
+document.addEventListener('DOMContentLoaded', function() {
+    var csrfToken = document.head.querySelector('meta[name="csrf_token"]').content;
+
+    var editCollegeButtons = document.querySelectorAll('.custom-edit-button');
+    var editCollegeModal = document.getElementById('editCollegeModal');
+    var closeEditCollegeModalButton = document.getElementById('closeEditCollegeModal');
+    var editForm = document.getElementById('editForm');
+    var editCollegeCodeInput = document.getElementById('editCollegeCode');
+    var editCollegeNameInput = document.getElementById('editCollegeName');
+
+    editCollegeButtons.forEach(function(button) {
+        button.addEventListener('click', function() {
+            console.log('Edit button clicked');
+            var collegeCode = this.getAttribute('data-college-code');
+            var collegeName = this.getAttribute('data-college-name');
+
+            editCollegeCodeInput.value = collegeCode;
+            editCollegeNameInput.value = collegeName;
+
+            editCollegeModal.style.display = 'flex';
+        });
+    });
+
+    closeEditCollegeModalButton.addEventListener('click', function() {
+        editCollegeModal.style.display = 'none';
+    });
+
+    window.addEventListener('click', function(event) {
+        if (event.target === editCollegeModal) {
+            editCollegeModal.style.display = 'none';
+        }
+    });
+
+    editForm.addEventListener('submit', function(event) {
+        event.preventDefault();
+
+        var collegeCodeValue = editCollegeCodeInput.value;
+        var collegeNameValue = editCollegeNameInput.value;
+
+        fetch('/colleges/update', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'X-CSRFToken': csrfToken,
+            },
+            body: JSON.stringify({
+                editCollegeCode: collegeCodeValue,
+                editCollegeName: collegeNameValue,
+            }),
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.message) {
+                console.log('Success:', data.message);
+                alert('Colleges updated successfully');
+                
+                window.location.href = '/colleges';
+            } else if (data.error) {
+                console.error('Error:', data.error);
+            }
+        })
+        .catch(error => {
+            console.error('Error:', error);
+        })
+        .finally(() => {
+            editCollegeModal.style.display = 'none';
+        });
+    });
+});
+
+
+// EDIT -- Courses
+document.addEventListener('DOMContentLoaded', function() {
+    var csrfToken = document.head.querySelector('meta[name="csrf_token"]').content;
+
+    var editButtons = document.querySelectorAll('.custom-edit-button');
+    var editModal = document.getElementById('editCourseModal');
+    var closeEditCourseModalButton = document.getElementById('closeEditCourseModal');
+    var editForm = document.getElementById('editForm');
+    var editCourseCodeInput = document.getElementById('editCourseCode');
+    var editCourseNameInput = document.getElementById('editCourseName');
+    var editCollegeInput = document.getElementById('editCollege');
+
+    editButtons.forEach(function(button) {
+        button.addEventListener('click', function() {
+            console.log('Edit button clicked');
+            var courseCode = this.getAttribute('data-course-code');
+            var courseName = this.parentElement.parentElement.children[1].innerText;
+            var college = this.parentElement.parentElement.children[2].innerText;
+
+            editCourseCodeInput.value = courseCode;
+            editCourseNameInput.value = courseName;
+            editCollegeInput.value = college;
+
+            editModal.style.display = 'flex';
+        });
+    });
+
+    closeEditCourseModalButton.addEventListener('click', function() {
+        editModal.style.display = 'none';
+    });
+
+    window.addEventListener('click', function(event) {
+        if (event.target === editModal) {
+            editModal.style.display = 'none';
+        }
+    });
+
+    editForm.addEventListener('submit', function(event) {
+        event.preventDefault();
+
+        var courseCodeValue = editCourseCodeInput.value;
+        var courseNameValue = editCourseNameInput.value;
+        var collegeValue = editCollegeInput.value;
+
+        fetch('/courses/update', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'X-CSRFToken': csrfToken,
+            },
+            body: JSON.stringify({
+                editCourseCode: courseCodeValue,
+                editCourseName: courseNameValue,
+                editCollege: collegeValue,
+            }),
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.message) {
+                console.log('Success:', data.message);
+                alert('Course updated successfully');
+            } else if (data.error) {
+                console.error('Error:', data.error);
+            }
+        })
+        .catch(error => {
+            console.error('Error:', error);
+        })
+        .finally(() => {
+            editModal.style.display = 'none';
+            window.location.reload(); 
+        });
+    });
+});
+
+// EDIT -- Students
+document.addEventListener('DOMContentLoaded', function() {
+    var csrfToken = document.head.querySelector('meta[name="csrf_token"]').content;
+
+    var editButtons = document.querySelectorAll('.custom-edit-button');
+    var editModal = document.getElementById('editStudentModal');
+    var closeEditStudentModalButton = document.getElementById('closeEditStudentModal');
+    var editForm = document.getElementById('editForm');
+    var editStudentIdInput = document.getElementById('editStudentId');
+    var editStudentFNameInput = document.getElementById('editStudentFName');
+    var editStudentLNameInput = document.getElementById('editStudentLName');
+    var editCourseInput = document.getElementById('editCourse');
+    var editYearInput = document.getElementById('editYear');
+    var editGenderInput = document.getElementById('editGender');
+
+    editButtons.forEach(function(button) {
+        button.addEventListener('click', function() {
+            console.log('Edit button clicked');
+            var studentId = this.getAttribute('data-student-id');
+            var studentFName = this.getAttribute('data-fname');
+            var studentLName = this.getAttribute('data-lname');
+            var course = this.getAttribute('data-course');
+            var year = this.getAttribute('data-year');
+            var gender = this.getAttribute('data-gender');
+
+            editStudentIdInput.value = studentId;
+            editStudentFNameInput.value = studentFName;
+            editStudentLNameInput.value = studentLName;
+            editCourseInput.value = course;
+            editYearInput.value = year;
+            editGenderInput.value = gender;
+
+            editModal.style.display = 'flex';
+        });
+    });
+
+    closeEditStudentModalButton.addEventListener('click', function() {
+        editModal.style.display = 'none';
+    });
+
+    window.addEventListener('click', function(event) {
+        if (event.target === editModal) {
+            editModal.style.display = 'none';
+        }
+    });
+
+    editForm.addEventListener('submit', function(event) {
+        event.preventDefault();
+
+        var studentIdValue = editStudentIdInput.value;
+        var studentFNameValue = editStudentFNameInput.value;
+        var studentLNameValue = editStudentLNameInput.value;
+        var courseValue = editCourseInput.value;
+        var yearValue = editYearInput.value;
+        var genderValue = editGenderInput.value;
+
+        fetch('/students/update', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'X-CSRFToken': csrfToken,
+            },
+            body: JSON.stringify({
+                editStudentId: studentIdValue,
+                editStudentFName: studentFNameValue,
+                editStudentLName: studentLNameValue,
+                editCourse: courseValue,
+                editYear: yearValue,
+                editGender: genderValue,
+            }),
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.message) {
+                console.log('Success:', data.message);
+                alert('Student updated successfully');
+            } else if (data.error) {
+                console.error('Error:', data.error);
+            }
+        })
+        .catch(error => {
+            console.error('Error:', error);
+        })
+        .finally(() => {
+            editModal.style.display = 'none';
+            window.location.reload(); 
+        });
+    });
+});

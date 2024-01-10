@@ -336,9 +336,9 @@ table thead tr{
 }
 .modal-body {
     padding: 20px 0;
-    min-height: 200px; 
+    min-height: 100px; 
     padding: 30px; 
-    min-width: 300px;    
+    min-width: 100px;    
 }
 .modal-footer{
     padding: 2px 16px;
@@ -492,7 +492,8 @@ table thead tr{
 .profile--wrapper .left img {
     margin-bottom: 20px;
     border-radius: 5px;
-    height: 500px;
+    height: 400px;
+    width: 350px;
 }
 .profile--wrapper .left img:hover {
     transform: scale(1.05);
@@ -502,6 +503,7 @@ table thead tr{
 .profile--wrapper .left h4 {
     margin-bottom: 20px;
     font-size: 20px;
+    padding-top: 100px;
 }
 .profile--wrapper p {
     font-size: 18px;

@@ -2,14 +2,15 @@
 from flask import render_template, redirect, request, url_for, jsonify, flash
 from app.services.colleges_service import get_all_colleges
 from . import colleges
-from app.services.colleges_service import add_college, delete_college
-
+from app.services.colleges_service import add_college, delete_college, update_college
+from ...models.collegeModel import College
+import cloudinary
 
 @colleges.route('/colleges')
 def show_colleges():
-    colleges_data = get_all_colleges()
-    return render_template('college.html', colleges_data=colleges_data)
-
+    college_data = get_all_colleges() 
+    print(college_data)
+    return render_template('college.html', college_data=college_data)
 
 
 @colleges.route('/colleges/add', methods=['GET', 'POST'])
@@ -30,9 +31,8 @@ def add_college_form():
 
 
 
-
 @colleges.route('/colleges/delete/<string:collegeCode>', methods=['DELETE'])
-def delete_course_route(collegeCode):
+def delete_college_route(collegeCode):
     try:
 
         delete_college(collegeCode)
@@ -41,3 +41,28 @@ def delete_course_route(collegeCode):
         response = {'status': 'error', 'message': str(e)}
 
     return jsonify(response)
+
+
+
+@colleges.route('/colleges/update', methods=['POST'])
+def update_college_route():
+    try:
+        college_code = request.json.get('editCollegeCode')
+        college_name = request.json.get('editCollegeName')
+
+        print('Received data:', college_code, college_name)
+
+        success = update_college(college_code, college_name)
+
+        if success:
+            return jsonify({'message': 'College updated successfully'}), 200
+        else:
+            return jsonify({'error': 'Error updating college'}), 500
+    except Exception as e:
+        print('Error:', e)
+        return jsonify({'error': 'An error occurred. Please try again.'}), 500
+
+
+
+
+   
