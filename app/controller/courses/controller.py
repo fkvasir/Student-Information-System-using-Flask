@@ -4,6 +4,7 @@ from app.services.courses_service import get_all_courses, add_course, delete_cou
 from . import courses
 from app.models.coursesModel import Course
 from app import mysql
+from app.models.collegeModel import College
 
 
 @courses.route('/courses')
@@ -50,22 +51,29 @@ def delete_course_route(courseCode):
     return jsonify(response)
 
 
-
 @courses.route('/courses/update', methods=['POST'])
 def update_course_route():
     try:
-        course_code = request.json.get('editCourseCode')
-        course_name = request.json.get('editCourseName')
-        college = request.json.get('editCollege')
+        data = request.get_json()  
+        course_code = data.get('editCourseCode') 
+        course_name = data.get('editCourseName')
+        college = data.get('editCollege')
 
-        print('Received data:', course_code, course_name, college)
-
-        success = update_course(course_code, course_name, college)
-
+        success = update_course(course_code,course_name , college)
         if success:
-            return jsonify({'message': 'Course updated successfully'}), 200
+            return jsonify({'message': 'Courses updated successfully'}), 200
         else:
             return jsonify({'error': 'Error updating course'}), 500
+    except Exception as e:
+        print('Error:', e)
+        return jsonify({'error': 'An error occurred. Please try again.'}), 500
+
+
+@courses.route('/colleges/get_college', methods=['GET'])
+def get_college():
+    try:
+        college = College.get_all_college()
+        return jsonify(college), 200
     except Exception as e:
         print('Error:', e)
         return jsonify({'error': 'An error occurred. Please try again.'}), 500

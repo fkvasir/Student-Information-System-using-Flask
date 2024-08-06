@@ -4,7 +4,7 @@ def get_all_colleges():
     connection = mysql.connection
     cursor = connection.cursor(dictionary=True)
 
-    cursor.execute("SELECT * FROM college")
+    cursor.execute("SELECT * FROM college ORDER BY createdAt DESC")
     colleges_data = cursor.fetchall()
 
     cursor.close()
@@ -62,3 +62,14 @@ def update_college(college_code, college_name):
     finally:
         cursor.close()
 
+def search_colleges(query):
+    connection = mysql.connection
+    cursor = connection.cursor(dictionary=True)
+
+    search_query = "SELECT * FROM college WHERE collegeCode LIKE %s OR collegeName LIKE %s"
+    cursor.execute(search_query, ('%' + query + '%', '%' + query + '%'))
+
+    colleges_data = cursor.fetchall()
+    cursor.close()
+
+    return colleges_data

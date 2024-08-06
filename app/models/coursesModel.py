@@ -12,3 +12,16 @@ class Course:
 
         cursor.close()
         return course_data
+    
+    
+    @staticmethod
+    def get_all_courses():
+        connection = mysql.connection
+        cursor = connection.cursor(dictionary=True)
+
+        query = "SELECT courseCode, courseName FROM course"
+        cursor.execute(query)
+        courses = cursor.fetchall()
+
+        cursor.close()
+        return courses

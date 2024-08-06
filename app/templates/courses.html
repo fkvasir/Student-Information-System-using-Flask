@@ -27,7 +27,9 @@
                         <td>{{ course['courseName'] }}</td>
                         <td>{{ course['college'] }}</td>
                         <td>
-                            <button type="button" class="custom-edit-button" id="editButtonStudent" data-course-code="{{ course.courseCode }}">
+                            <button type="button" class="custom-edit-button" id="editButtonStudent" 
+                                data-course-code="{{ course['courseCode'] }}" 
+                                data-course-name="{{course['courseName'] }}">
                                 <i class="fa-solid fa-pen"></i>
                             </button>
                             <button type="button" class="custom-coursedelete-button" data-course-code="{{ course.courseCode }}"> <i class="fa-solid fa-trash"></i>
@@ -49,7 +51,7 @@
                 <div class="modal-body">
                     <form id="editForm" method="post" action="{{ url_for('courses.update_course_route') }}">
                         <div class="inputBox">
-                            <input type="text" id="editCourseCode" name="editCourseCode" value="{{courseCode }}" required>
+                            <input class="course-code" type="text" id="editCourseCode" name="editCourseCode" value="{{courseCode }}" required disabled>
                             <label for="editCourseCode">Course Code:</label>
                         </div>
                         <div class="inputBox">
@@ -57,10 +59,14 @@
                             <label for="editCourseName">Course Name:</label>
                         </div>
                         <div class="inputBox">
-                            <input type="text" id="editCollege" name="editCollege" value="{{college }}" required>
-                            <label for="editCollege">College:</label>
+                            <select class="college-dropdown" id="editCollege" name="editCollege" required>
+                                {% for course in courses %}
+                                    <option value="{{ college.collegeCode }}">{{ college.collegeCode }} - {{ college.collegeName }}</option>
+                                {% endfor %}
+                            </select>
+                            <label class="college-label" for="editCollege">College:</label>
                         </div>
-                    
+                        
                         <div class="modal-footer">
                             <button type="submit" class="primary-button" id="updateCourseButton">Save Changes</button>
                         </div>

@@ -23,10 +23,12 @@
                 <tbody>
                     {% for college in college_data %}
                     <tr>
-                        <td>{{ college.collegeCode }}</td>
-                        <td>{{ college.collegeName }}</td>
+                        <td>{{ college['collegeCode'] }}</td>
+                        <td>{{ college['collegeName'] }}</td>
                         <td>
-                            <button type="button" class="custom-edit-button" data-college-code="{{ college.collegeCode }}" data-college-name="{{ college.collegeName }}">
+                            <button type="button" class="custom-edit-button" 
+                            data-college-code="{{ college.collegeCode }}" 
+                            data-college-name="{{ college.collegeName }}">
                                 <i class="fa-solid fa-pen"></i>
                             </button>                            
                             <button type="button" class="custom-collegedelete-button" data-college-code="{{ college.collegeCode }}">
@@ -49,7 +51,7 @@
                 <div class="modal-body">
                     <form id="editForm" method="post" action="{{ url_for('colleges.update_college_route') }}">
                         <div class="inputBox">
-                            <input type="text" id="editCollegeCode" name="editCollegeCode" value="{{collegeCode }}" required>
+                            <input type="text" id="editCollegeCode" name="editCollegeCode" value="{{collegeCode }}" required disabled>
                             <label for="editCollegeCode">College Code:</label>
                         </div>
                         <div class="inputBox">

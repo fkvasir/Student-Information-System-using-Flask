@@ -5,7 +5,7 @@ def get_all_courses():
     connection = mysql.connection
     cursor = connection.cursor(dictionary=True)
 
-    cursor.execute("SELECT * FROM course")
+    cursor.execute("SELECT * FROM course ORDER BY createdAt DESC")
     courses_data = cursor.fetchall()
 
     cursor.close()
@@ -56,9 +56,9 @@ def update_course(course_code, course_name, college):
 
     try:
         print('Updating course:', course_code, course_name, college)
-        query = "UPDATE course SET courseCode = %s WHERE courseName = %s AND college = %s"
+        query = "UPDATE course SET courseName = %s, college = %s WHERE courseCode = %s"
         print('Query:', query)
-        cursor.execute(query, (course_code, course_name, college))
+        cursor.execute(query, (course_name, college, course_code))
         connection.commit()
         return True
     
@@ -71,3 +71,15 @@ def update_course(course_code, course_name, college):
         cursor.close()
 
     
+    
+def search_courses(query):
+    connection = mysql.connection
+    cursor = connection.cursor(dictionary=True)
+
+    search_query = "SELECT * FROM course WHERE courseCode LIKE %s OR courseName LIKE %s"
+    cursor.execute(search_query, ('%' + query + '%', '%' + query + '%'))
+
+    courses_data = cursor.fetchall()
+    cursor.close()
+
+    return courses_data

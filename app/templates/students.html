@@ -75,15 +75,29 @@
                             <label for="editStudentLName">Last Name:</label>
                         </div>
                         <div class="inputBox">
-                            <input type="text" id="editCourse" name="editCourse" value="{{course }}" required>
+                            <select id="editCourse" name="editCourse" required>
+                                {% for course in courses %}
+                                    <option value="{{ course.courseCode }}">{{ course.courseCode }} - {{ course.courseName }}</option>
+                                {% endfor %}
+                            </select>
                             <label for="editCourse">Course:</label>
                         </div>
                         <div class="inputBox">
-                            <input type="text" id="editYear" name="editYear" value="{{year }}" required>
+                            <select id="editYear" name="editYear" required>
+                                <option value="1st Year">1st Year</option>
+                                <option value="2nd Year">2nd Year</option>
+                                <option value="3rd Year">3rd Year</option>
+                                <option value="4th Year">4th Year</option>
+                                <option value="5th Year">5th Year</option>
+                                <option value="6th Year">6th Year</option>
+                            </select>
                             <label for="editYear">Year:</label>
                         </div>
                         <div class="inputBox">
-                            <input type="text" id="editGender" name="editGender" value="{{gender }}" required>
+                            <select id="editGender" name="editGender" required>
+                                <option value="Male">Male</option>
+                                <option value="Female">Female</option>
+                            </select>
                             <label for="editGender">Gender:</label>
                         </div>
                     

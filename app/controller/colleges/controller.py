@@ -47,13 +47,11 @@ def delete_college_route(collegeCode):
 @colleges.route('/colleges/update', methods=['POST'])
 def update_college_route():
     try:
-        college_code = request.json.get('editCollegeCode')
-        college_name = request.json.get('editCollegeName')
-
-        print('Received data:', college_code, college_name)
+        data = request.get_json()  
+        college_code = data.get('editCollegeCode')  # Assuming the key is 'editCollegeCode'
+        college_name = data.get('editCollegeName')
 
         success = update_college(college_code, college_name)
-
         if success:
             return jsonify({'message': 'College updated successfully'}), 200
         else:
@@ -61,8 +59,6 @@ def update_college_route():
     except Exception as e:
         print('Error:', e)
         return jsonify({'error': 'An error occurred. Please try again.'}), 500
-
-
 
 
    
