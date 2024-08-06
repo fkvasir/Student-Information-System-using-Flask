@@ -213,6 +213,7 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
 });
+
 document.addEventListener('DOMContentLoaded', function() {
     var addStudentButton = document.getElementById('addStudentButton');
     
@@ -224,6 +225,7 @@ document.addEventListener('DOMContentLoaded', function() {
             var course = document.getElementById('course').value;
             var year = document.getElementById('year').value;
             var gender = document.getElementById('gender').value;
+            var profilePicture = document.getElementById('profile-picture').value;
             var csrfToken = document.querySelector("meta[name='csrf_token']").content;
             
             var formData = new FormData();
@@ -233,6 +235,7 @@ document.addEventListener('DOMContentLoaded', function() {
             formData.append('course', course);
             formData.append('year', year);
             formData.append('gender', gender);
+            formData.append('profile_picture', profilePicture); 
 
             fetch('/students/add', {
                 method: 'POST',
@@ -241,13 +244,8 @@ document.addEventListener('DOMContentLoaded', function() {
                     "X-CSRFToken": csrfToken,
                 },
             })
-            .then(response => {
-
-                console.log(response);
-                return response.json();
-            })
+            .then(response => response.json())
             .then(data => {
-                console.log(data);  
                 if (data.status === 'success') {
                     alert('Student added successfully!');
                     window.location.href = "/students";
@@ -305,10 +303,10 @@ document.addEventListener('DOMContentLoaded', function() {
 
     editForm.addEventListener('submit', function(event) {
         event.preventDefault();
-
-        var collegeCodeValue = editCollegeCodeInput.value;
+    
+        var collegeCodeValue = editCollegeCodeInput.value; 
         var collegeNameValue = editCollegeNameInput.value;
-
+    
         fetch('/colleges/update', {
             method: 'POST',
             headers: {
@@ -317,7 +315,7 @@ document.addEventListener('DOMContentLoaded', function() {
             },
             body: JSON.stringify({
                 editCollegeCode: collegeCodeValue,
-                editCollegeName: collegeNameValue,
+                editCollegeName: collegeNameValue
             }),
         })
         .then(response => response.json())
@@ -353,11 +351,12 @@ document.addEventListener('DOMContentLoaded', function() {
     var editCourseNameInput = document.getElementById('editCourseName');
     var editCollegeInput = document.getElementById('editCollege');
 
+
     editButtons.forEach(function(button) {
         button.addEventListener('click', function() {
             console.log('Edit button clicked');
             var courseCode = this.getAttribute('data-course-code');
-            var courseName = this.parentElement.parentElement.children[1].innerText;
+            var courseName = this.getAttribute('data-course-name');
             var college = this.parentElement.parentElement.children[2].innerText;
 
             editCourseCodeInput.value = courseCode;
@@ -392,7 +391,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 'X-CSRFToken': csrfToken,
             },
             body: JSON.stringify({
-                editCourseCode: courseCodeValue,
+                editCourseCode: courseCodeValue, // Include courseCode
                 editCourseName: courseNameValue,
                 editCollege: collegeValue,
             }),
@@ -414,6 +413,17 @@ document.addEventListener('DOMContentLoaded', function() {
             window.location.reload(); 
         });
     });
+    fetch('/colleges/get_college')
+    .then(response => response.json())
+    .then(courses => {
+        const courseDropdown = document.getElementById('editCollege');
+        courses.forEach(course => {
+            const option = document.createElement('option');
+            option.value = course.collegeCode;
+            option.text = `${course.collegeCode} - ${course.collegeName}`;
+            courseDropdown.add(option);
+        });
+    })
 });
 
 // EDIT -- Students
@@ -504,4 +514,19 @@ document.addEventListener('DOMContentLoaded', function() {
             window.location.reload(); 
         });
     });
+    fetch('/courses/get_courses')
+    .then(response => response.json())
+    .then(courses => {
+        const courseDropdown = document.getElementById('editCourse');
+        courses.forEach(course => {
+            const option = document.createElement('option');
+            option.value = course.courseCode;
+            option.text = `${course.courseCode} - ${course.courseName}`;
+            courseDropdown.add(option);
+        });
+    })
+    .catch(error => {
+        console.error('Error fetching courses:', error);
+    });
 });
+

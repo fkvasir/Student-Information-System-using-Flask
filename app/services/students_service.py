@@ -1,10 +1,11 @@
 from app import mysql
+import cloudinary.uploader
 
 def get_all_students():
     connection = mysql.connection
     cursor = connection.cursor(dictionary=True)
 
-    cursor.execute("SELECT * FROM student")
+    cursor.execute("SELECT * FROM student ORDER BY studentLname ASC")
     students_data = cursor.fetchall()
 
     cursor.close()
@@ -12,24 +13,25 @@ def get_all_students():
     return students_data
 
 
-def add_student(student_id, student_fname, student_lname, course, year, gender, image_url):
+def add_student(student_id, student_fname, student_lname, course, year, gender, profile_picture):
     try:
         connection = mysql.connection
         cursor = connection.cursor()
 
         cursor.execute(
-            "INSERT INTO student (studentID, studentFname, studentLname, course, year, gender, image_url) VALUES (%s, %s, %s, %s, %s, %s,%s)",
-            (student_id, student_fname, student_lname, course, year, gender,image_url)
+            "INSERT INTO student (studentID, studentFname, studentLname, course, year, gender, profile_picture) VALUES (%s, %s, %s, %s, %s, %s, %s)",
+            (student_id, student_fname, student_lname, course, year, gender, profile_picture)
         )
         connection.commit()
         cursor.close()
-        return True  
+        return True
     except Exception as e:
         print(f"Error adding student: {e}")
-        return False  
+        return False
     finally:
         if connection:
             connection.close()
+
 
 def delete_student(studentID):
     connection = mysql.connection
@@ -84,3 +86,26 @@ def get_student_info(student_ID):
     result = cursor.fetchone()
     cursor.close()
     return result
+
+
+def search_students(query):
+    connection = mysql.connection
+    cursor = connection.cursor(dictionary=True)
+
+    search_query = (
+        "SELECT * FROM student WHERE "
+        "studentID LIKE %s OR "
+        "studentFname LIKE %s OR "
+        "studentLname LIKE %s OR "
+        "gender LIKE %s OR "
+        "course LIKE %s"
+    )
+
+    like_query = '%' + query + '%'
+
+    cursor.execute(search_query, (like_query, like_query, like_query, like_query, like_query))
+
+    students_data = cursor.fetchall()
+    cursor.close()
+
+    return students_data

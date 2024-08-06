@@ -176,7 +176,7 @@ body{
 }
 table thead tr{
     color: #fff;
-    background: #34AF6D;
+    background: #D4AF37;
     text-align: left;
     font-weight: bold;
 }
@@ -189,14 +189,14 @@ table thead tr{
     border-bottom: 1px solid #ddd;
 }
 .table tbody tr:nth-child(even){
-    background: lightgreen;  
+    background: #FFDF00;  
 }
 .table tbody tr.active{
     font-weight: bold;
-    color: #34AF6D;
+    color: #FFDF00;
 }
 .table tbody tr:last-of-type{
-    border-bottom: 2px solid #34AF6D;
+    border-bottom: 3px solid #D4AF37;
 }
 .button-container {
     display: flex;
@@ -298,7 +298,6 @@ table thead tr{
     left: 0;
     right: 0;
     bottom: 0;
-    z-index: 2;
     height: 100%;
     width: 100%;
     overflow: auto;
@@ -312,8 +311,8 @@ table thead tr{
 .modal-content {
     background: #fff;
     width: 100%;
-    margin-left: auto;
-    margin-right: auto;
+    margin-left: 30%;
+    margin-right: 30%;
     padding: 20px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
     border: 1px soli #686767;
@@ -351,6 +350,7 @@ table thead tr{
     border-bottom: 2px solid black;
     margin: 10px;
 }
+
 .inputBox label {
     position: absolute;
     top: 10px;
@@ -362,11 +362,13 @@ table thead tr{
     pointer-events: none;
     transition: .5s;
 }
+
 .inputBox input:valid ~ label,
 .inputBox input:focus ~ label {
     top: -10px;
     font-size: 0.75em;
 }
+
 .inputBox input {
     width: 100%;
     padding: 15px 10px;
@@ -377,7 +379,24 @@ table thead tr{
     font-weight: 800;
     transition: 0.5s;
 }
-
+.course-code {
+    padding-top: 15px;
+    margin: 0;
+}
+.college-dropdown {
+    padding: 5px 10px;
+}
+.college-label {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    transform: translateY(0);
+    font-size: 1em;
+    color: black;
+    font-weight: 500;
+    pointer-events: none;
+    transition: .5s;
+}
 /* Close Button */
 .custom-close-button {
     background-color: #969696;

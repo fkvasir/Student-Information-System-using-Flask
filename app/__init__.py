@@ -1,9 +1,12 @@
-from flask import Flask, render_template
+from flask import Flask, render_template, request, redirect, url_for
 from flask_mysql_connector import MySQL
 from flask_bootstrap import Bootstrap
 from config import DB_USERNAME, DB_PASSWORD, DB_NAME, DB_HOST, SECRET_KEY
 from flask_wtf.csrf import CSRFProtect
-
+import cloudinary
+import cloudinary.uploader
+import cloudinary.api
+import os
 
 mysql = MySQL()
 bootstrap = Bootstrap()
@@ -36,3 +39,7 @@ def create_app():
 
 
     return app
+
+
+
+

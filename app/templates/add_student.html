@@ -1,18 +1,20 @@
 {% extends "layouts.html" %}
 
 {% block content %}
+<!-- add_student.html -->
 <div class="add-form-container">
   <h1>Students</h1>
   <hr>
   <div class="add-container">
     <h2><b>Add New Student</b></h2>
     <div class="picture-upload">
-      <label for="upload">Upload Picture</label>
-      <input type="file" id="upload" name="upload" accept="image/*" onchange="displayFileName()"> 
+      <button type="button" id="uploadButton" onclick="uploadImage()">Upload Picture</button>
       <p id="file-name"></p> 
-    </div>
+  </div>
+  
+    <input type="hidden" id="profile-picture" name="profile_picture">
     <div class="label-containers">
-      <form method="post" action="{{ url_for('students.add_student_form') }}" enctype="multipart/form-data">
+      <form id="addStudentForm" method="POST" action="{{ url_for('students.add_student_form') }}" enctype="multipart/form-data">
         <label for="studentID">Student ID:</label>
         <input type="text" id="studentID" name="studentID" required>
 
@@ -35,28 +37,58 @@
           <option value="2nd Year">2nd Year</option>
           <option value="3rd Year">3rd Year</option>
           <option value="4th Year">4th Year</option>
+          <option value="5th Year">5th Year</option>
+          <option value="6th Year">6th Year</option>
         </select>
         
         <label for="gender">Gender:</label>
         <select id="gender" name="gender" required>
           <option value="Male">Male</option>
           <option value="Female">Female</option>
-          <option value="Others">Others</option>
-
         </select>
 
-        <button type="button" id="addStudentButton">Add Student</button>
+        <button type="button" id="addStudentButton" onclick="submitForm()">Add Student</button>
       </form>
     </div>
   </div>  
 </div> 
-<script>
-  function displayFileName() {
-    const uploadInput = document.getElementById('upload');
-    const fileNameDisplay = document.getElementById('file-name');
 
-    fileNameDisplay.innerText = uploadInput.files.length > 0 ? `File Name: ${uploadInput.files[0].name}` : '';
+<script>
+  function uploadImage() {
+    cloudinary.openUploadWidget({
+        cloudName: 'dtounqe2m',  
+        uploadPreset: 'ml_default', 
+        sources: ['local', 'url'], 
+        cropping: true, 
+        multiple: false, 
+        folder: 'web_ssis', 
+        showAdvancedOptions: false,  
+        showUploadMoreButton: false 
+    }, (error, result) => {
+        if (error) {
+            console.error("Error uploading image:", error.message || error);
+            alert("Error uploading image: " + (error.message || error));
+            return;
+        }
+        if (result && result.event === 'success') {
+            const imageUrl = result.info.secure_url;
+            console.log("Image uploaded successfully. URL: ", imageUrl);
+            document.getElementById('profile-picture').value = imageUrl;
+            document.getElementById('file-name').textContent = result.info.original_filename;
+        }
+    });
   }
+
+  function submitForm() {
+       const profilePictureUrl = document.getElementById('profile-picture').value;
+
+       if (!profilePictureUrl) {
+           alert('Please upload a picture before submitting.');
+           return;
+       }
+
+       document.getElementById('addStudentForm').submit();
+   }
 </script>
 
 {% endblock %}

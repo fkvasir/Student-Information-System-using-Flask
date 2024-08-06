@@ -20,7 +20,17 @@ class Student:
         cursor = connection.cursor(dictionary=True)
 
         query = """
-            SELECT student.*, course.courseCode, college.collegeCode
+            SELECT 
+                student.studentID, 
+                student.studentFname, 
+                student.studentLname, 
+                student.year, 
+                student.gender, 
+                student.profile_picture,
+                course.courseCode, 
+                course.courseName, 
+                college.collegeCode, 
+                college.collegeName
             FROM student
             LEFT JOIN course ON student.course = course.courseCode
             LEFT JOIN college ON course.college = college.collegeCode
@@ -31,8 +41,3 @@ class Student:
 
         cursor.close()
         return student_data_with_college
-
-
-
-
-

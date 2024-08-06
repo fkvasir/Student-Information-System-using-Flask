@@ -5,13 +5,13 @@
     @import url('https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@100&family=Roboto:wght@500&display=swap');
     
 </style>
-
+<!-- student_profile.html -->
 <section class="student-profile">
     <div class="profile--wrapper">
         <div class="left">
-            <img src="https://res.cloudinary.com/dtounqe2m/image/upload/v1703271588/webssis/default-pic.jpg" alt="user--pic" id="profile-image">
+            <img src="{{ student_data['profile_picture'] or 'https://res.cloudinary.com/dtounqe2m/image/upload/v1703271588/webssis/default-pic.jpg' }}" alt="user--pic" id="profile-image">
             <div class="dark-overlay"></div>
-            <button class="edit-button" onclick="openFileInput()"><i class="fa-solid fa-pen"></i></button>
+            <button class="edit-button" onclick="openCloudinaryWidget()"><i class="fa-solid fa-pen"></i></button>
             <div class="profile--name">
                 <h4><b>Student ID: {{ student_data['studentID'] }}</b></h4>
                 <p>STUDENT</p>
@@ -38,12 +38,12 @@
                 <div class="other--data">
                     <div class="data">
                         <h4>Course</h4>
-                        <p>{{ student_data['course'] }}</p>
+                        <p>{{ student_data['courseName'] }}</p> 
                     </div>
                     <div class="data">
                         <h4>College</h4>
-                        {% if student_data['collegeCode'] %}
-                            <p>{{ student_data['collegeCode'] }}</p>
+                        {% if student_data['collegeName'] %}
+                            <p>{{ student_data['collegeName'] }}</p>
                         {% else %}
                             <p>No College</p>
                         {% endif %}
@@ -63,8 +63,25 @@
     </div>
 </section>
 <script>
-    function openFileInput() {
-        document.getElementById('file-input').click();
+    function openCloudinaryWidget() {
+        cloudinary.openUploadWidget({
+            cloudName: 'dtounqe2m', 
+            uploadPreset: 'ml_default', 
+            sources: ['local', 'url', 'camera'],
+            cropping: true,
+            multiple: false,
+            resourceType: 'image',
+            publicId: 'profile_picture_' + '{{ student_data["studentID"] }}',
+            folder: 'web_ssis', 
+            fieldName: 'file',
+            showAdvancedOptions: true,
+        }, (error, result) => {
+            if (!error && result && result.event === 'success') {
+                const imageUrl = result.info.secure_url;
+                document.getElementById('profile-image').src = imageUrl;
+                // You can also send the imageUrl to your server and update the profilePicture field in your database
+            }
+        });
     }
 </script>
 
