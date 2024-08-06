@@ -130,6 +130,31 @@ def upload_student_image():
     except Exception as e:
         print(f"Database update error: {e}")
         return jsonify({'error': 'Failed to update profile picture in the database'}), 500
+    
+    
+@students.route('/students/update_profile_picture', methods=['POST'])
+def update_profile_picture():
+    if request.method == 'POST':
+        data = request.get_json()
+        student_id = data.get('studentID')
+        profile_picture = data.get('profile_picture')
+
+        try:
+            connection = mysql.connection
+            cursor = connection.cursor()
+            cursor.execute(
+                "UPDATE student SET profile_picture = %s WHERE studentID = %s",
+                (profile_picture, student_id)
+            )
+            connection.commit()
+            cursor.close()
+            return jsonify({'status': 'success', 'message': 'Profile picture updated successfully!'})
+        except Exception as e:
+            print(f"Error updating profile picture: {e}")
+            return jsonify({'status': 'error', 'message': str(e)})
+        finally:
+            if connection:
+                connection.close()
 
 
 

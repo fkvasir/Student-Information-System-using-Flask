@@ -3,7 +3,6 @@
 {% block content %}
 <style>
     @import url('https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@100&family=Roboto:wght@500&display=swap');
-    
 </style>
 <!-- student_profile.html -->
 <section class="student-profile">
@@ -18,7 +17,6 @@
             </div>
         </div>
         <div class="right">
-
             <div class="info">
                 <h2><b>ABOUT</b></h2>
                 <h3>Information</h3>
@@ -47,8 +45,7 @@
                         {% else %}
                             <p>No College</p>
                         {% endif %}
-                      </div>                    
-                                                       
+                    </div>
                     <div class="data">
                         <h4>Year</h4>
                         <p>{{ student_data['year'] }}</p>
@@ -62,30 +59,57 @@
         </div>
     </div>
 </section>
+
 <script>
     function openCloudinaryWidget() {
         cloudinary.openUploadWidget({
-            cloudName: 'dtounqe2m', 
-            uploadPreset: 'ml_default', 
+            cloudName: 'dtounqe2m',
+            uploadPreset: 'ml_default',
             sources: ['local', 'url', 'camera'],
             cropping: true,
             multiple: false,
             resourceType: 'image',
             publicId: 'profile_picture_' + '{{ student_data["studentID"] }}',
-            folder: 'web_ssis', 
+            folder: 'web_ssis',
             fieldName: 'file',
             showAdvancedOptions: true,
         }, (error, result) => {
             if (!error && result && result.event === 'success') {
                 const imageUrl = result.info.secure_url;
                 document.getElementById('profile-image').src = imageUrl;
-                // You can also send the imageUrl to your server and update the profilePicture field in your database
+                // Send the new image URL to the server to update the database
+                updateProfilePicture(imageUrl);
             }
         });
     }
+
+    function updateProfilePicture(imageUrl) {
+        const studentID = '{{ student_data["studentID"] }}'; // or fetch dynamically if not available in template
+
+        fetch('/students/update_profile_picture', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'X-CSRFToken': document.querySelector("meta[name='csrf_token']").content,
+            },
+            body: JSON.stringify({
+                studentID: studentID,
+                profile_picture: imageUrl,
+            }),
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.status === 'success') {
+                alert('Profile picture updated successfully!');
+            } else {
+                alert('Error updating profile picture: ' + data.message);
+            }
+        })
+        .catch(error => {
+            console.error('Error:', error);
+            alert('An error occurred while updating the profile picture.');
+        });
+    }
 </script>
-
-<input type="file" id="file-input" style="display: none" accept="image/*">
-
 
 {% endblock %}
