@@ -10,4 +10,5 @@ def search():
         results = search_service.search_all(query)
         return render_template('search_results.html', results=results)
 
-    return render_template('search.html')
+
+

@@ -158,3 +158,14 @@ def update_profile_picture():
 
 
 
+@students.route('/search', methods=['GET'])
+def search_students():
+    query = request.args.get('query')
+    criteria = request.args.get('criteria')
+
+    if not query or not criteria:
+        return jsonify({'status': 'error', 'message': 'Invalid search parameters'})
+
+    students_data = Student.search_students(query, criteria)
+
+    return render_template('search_results.html', students_data=students_data)

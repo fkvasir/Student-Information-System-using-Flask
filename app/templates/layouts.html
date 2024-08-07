@@ -52,17 +52,17 @@
             </div>
             <div class="user--info">
                 <div class="search--box">
-                    <i class="fa-solid fa-filter"></i>
-                    <form id="searchForm">
-                        <select id="searchCriteria">
-                            <option value="all">All</option>
-                            <option value="students">Students</option>
-                            <option value="courses">Courses</option>
-                            <option value="colleges">Colleges</option>
-                        </select>
-                    </form>
-                    <i class="fa-solid fa-magnifying-glass"></i>
-                    <input type="text" id="searchInput" placeholder="Search"/>
+                    <select id="searchCriteria" onchange="updateSearchInput()">
+                        <option value="studentID">Student ID</option>
+                        <option value="studentFname">First Name</option>
+                        <option value="studentLname">Last Name</option>
+                        <option value="course">Course</option>
+                        <option value="year">Year</option>
+                        <option value="gender">Gender</option>
+                    </select>
+                    <div id="searchInputContainer">
+                        <input type="text" id="searchInput" placeholder="Search"/>
+                    </div>
                     <button type="button" onclick="performSearch()">Search</button>
                 </div>
                 <img src="{{ url_for('static', filename='images/MSU_2018_10_25_10_31_04.jpg')}}" alt="Image 1">
@@ -88,18 +88,51 @@
         src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
         <script src="https://widget.cloudinary.com/v2.0/global/all.js" type="text/javascript"></script>
         <script>
-    function performSearch() {
-        var searchInput = document.getElementById('searchInput').value;
-        var searchCriteria = document.getElementById('searchCriteria').value;
+            function updateSearchInput() {
+                var searchCriteria = document.getElementById('searchCriteria').value;
+                var searchInputContainer = document.getElementById('searchInputContainer');
+            
+                if (searchCriteria === 'year' || searchCriteria === 'gender') {
+                    var options;
+            
 
-        // You can perform further actions based on the search criteria, e.g., redirect to a specific page
-        // or update the current page content using AJAX.
-
-        // For demonstration purposes, let's redirect to a search page.
-        var redirectUrl = "/search?query=" + encodeURIComponent(searchInput) + "&criteria=" + searchCriteria;
-        window.location.href = redirectUrl;
-    }
-</script>
+                    if (searchCriteria === 'year') {
+                        options = `
+                            <option value="1st Year">1st Year</option>
+                            <option value="2nd Year">2nd Year</option>
+                            <option value="3rd Year">3rd Year</option>
+                            <option value="4th Year">4th Year</option>
+                            <option value="5th Year">5th Year</option>
+                            <option value="6th Year">6th Year</option>
+                        `;
+                    } else if (searchCriteria === 'gender') {
+                        options = `
+                            <option value="Male">Male</option>
+                            <option value="Female">Female</option>
+                        `;
+                    }
+            
+                    searchInputContainer.innerHTML = `
+                        <select id="searchInput">
+                            ${options}
+                        </select>
+                    `;
+                } else {
+                    searchInputContainer.innerHTML = `
+                        <input type="text" id="searchInput" placeholder="Search"/>
+                    `;
+                }
+            }
+            
+            function performSearch() {
+                var searchInput = document.getElementById('searchInput').value;
+                var searchCriteria = document.getElementById('searchCriteria').value;
+            
+                var redirectUrl = "/search?query=" + encodeURIComponent(searchInput) + "&criteria=" + searchCriteria;
+                window.location.href = redirectUrl;
+            }
+            
+        </script>
 </body>
 
 

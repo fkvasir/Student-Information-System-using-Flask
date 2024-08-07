@@ -3,10 +3,10 @@
 {% block content %}
 <!-- add_student.html -->
 <div class="add-form-container">
-  <h1>Students</h1>
+  <h3>Students</h3>
   <hr>
   <div class="add-container">
-    <h2><b>Add New Student</b></h2>
+    <h3><b>Add New Student</b></h3>
     <div class="picture-upload">
       <button type="button" id="uploadButton" onclick="uploadImage()">Upload Picture</button>
       <p id="file-name"></p> 
@@ -81,11 +81,6 @@
 
   function submitForm() {
        const profilePictureUrl = document.getElementById('profile-picture').value;
-
-       if (!profilePictureUrl) {
-           alert('Please upload a picture before submitting.');
-           return;
-       }
 
        document.getElementById('addStudentForm').submit();
    }

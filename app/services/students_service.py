@@ -1,5 +1,7 @@
 from app import mysql
 import cloudinary.uploader
+from app.models.studentsModel import Student
+
 
 def get_all_students():
     connection = mysql.connection
@@ -109,3 +111,7 @@ def search_students(query):
     cursor.close()
 
     return students_data
+
+
+def search_students(query):
+    return Student.search(query)

@@ -41,3 +41,19 @@ class Student:
 
         cursor.close()
         return student_data_with_college
+    
+    
+    @staticmethod
+    def search_students(query, criteria):
+        connection = mysql.connection
+        cursor = connection.cursor(dictionary=True)
+
+        search_query = f"SELECT * FROM student WHERE {criteria} LIKE %s"
+        like_query = '%' + query + '%'
+
+        cursor.execute(search_query, (like_query,))
+        students_data = cursor.fetchall()
+        cursor.close()
+
+        return students_data
+
