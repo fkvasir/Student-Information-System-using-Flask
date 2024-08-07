@@ -80,9 +80,20 @@
   }
 
   function submitForm() {
-       const profilePictureUrl = document.getElementById('profile-picture').value;
+      const profilePictureUrl = document.getElementById('profile-picture').value;
+      var studentID = document.getElementById('studentID').value;
+      var studentFname = document.getElementById('studentFname').value;
+      var studentLname = document.getElementById('studentLname').value;
+      var course = document.getElementById('course').value;
+      var year = document.getElementById('year').value;
+      var gender = document.getElementById('gender').value;
 
-       document.getElementById('addStudentForm').submit();
+      if (!studentID || !studentFname || !studentLname || !course || !year || !gender) {
+        alert('Please fill all the required fields.');
+        return false;
+      }
+
+      document.getElementById('addStudentForm').submit();
    }
 </script>
 

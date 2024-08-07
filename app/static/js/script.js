@@ -1,3 +1,5 @@
+
+// DELETE -- STUDENTS
 document.addEventListener('DOMContentLoaded', function() {
   var deleteButtons = document.querySelectorAll('.custom-studentdelete-button');
 
@@ -37,6 +39,7 @@ document.addEventListener('DOMContentLoaded', function() {
   }
 });
 
+// DELETE -- COURSE
 document.addEventListener('DOMContentLoaded', function() {
     var deleteButtons = document.querySelectorAll('.custom-coursedelete-button');
   
@@ -75,6 +78,8 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
 });
+
+// DELETE -- COLLEGE
 document.addEventListener('DOMContentLoaded', function() {
     var deleteButtons = document.querySelectorAll('.custom-collegedelete-button');
   
@@ -117,7 +122,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
 
 
-
+// SHOW STUDENT PROFILE
 function showStudentProfile(studentID) {
     console.log("Student ID:", studentID);
     window.location.href = '/students/profile/' + studentID;
@@ -128,7 +133,7 @@ function showStudentProfile(studentID) {
 
 
 
-  
+// ADD -- COLLEGE
 document.addEventListener('DOMContentLoaded', function() {
     var addCollegeButton = document.getElementById('addCollegeButton');
     
@@ -170,6 +175,7 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
 });
+// ADD -- COURSE
 document.addEventListener('DOMContentLoaded', function() {
     var addCourseButton = document.getElementById('addCourseButton');
     
@@ -213,7 +219,7 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
 });
-
+// ADD -- STUDENT
 document.addEventListener('DOMContentLoaded', function() {
     var addStudentButton = document.getElementById('addStudentButton');
     

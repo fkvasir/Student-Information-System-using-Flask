@@ -31,6 +31,9 @@ def add_student_form():
         profile_picture = request.form.get('profile_picture') 
 
         print(f"Profile picture URL: {profile_picture}")  # Debugging line
+        
+        if not student_id or not student_fname or not student_lname or not course or not year or not gender:
+            return jsonify({'status': 'error', 'message': 'All fields are required!'}), 400
 
         try:
             add_student(student_id, student_fname, student_lname, course, year, gender, profile_picture)
