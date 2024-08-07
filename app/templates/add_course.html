@@ -24,9 +24,26 @@
         </select>
         
 
-        <button type="button" id="addCourseButton">Add Course</button>
+        <button type="button" id="addCourseButton" onclick="submitForm()">Add Course</button>
       </form>
     </div>
   </div>  
 </div>
+<script>
+    function submitForm() {
+      var courseCode = document.getElementById('courseCode').value;
+      var courseName = document.getElementById('courseName').value;
+      var college = document.getElementById('college').value;
+
+      // Check if all required fields are filled
+      if (!courseCode || !courseName || !college) {
+          alert('Please fill all the required fields.');
+          return false;
+      }
+
+      // If validation passes, submit the form
+      var form = document.querySelector('form');
+      form.submit();
+    }
+</script>
 {% endblock %}

@@ -20,7 +20,8 @@ def add_course_form():
         college = request.form.get('college')
         
         print(f"Received data: Course Code - {course_code}, Course Name - {course_name}, College - {college}")
-        
+        if not course_code or not course_name or not college:
+            return jsonify({'status': 'error', 'message': 'All fields are required.'}), 400
         try:
             add_course(course_code, course_name, college)
             return jsonify({'status': 'success', 'message': 'Course added successfully!'})
