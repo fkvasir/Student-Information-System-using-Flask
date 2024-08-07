@@ -9,7 +9,7 @@
     <h2><b>Add New College</b></h2>
 
     <div class="label-containers">
-      <form method="post" action="{{ url_for('colleges.add_college_form') }}">
+        <form id="addCollegeForm" method="post" action="{{ url_for('colleges.add_college_form') }}">
 
 
         <label for="collegeCode">College Code:</label>
@@ -25,17 +25,45 @@
   </div>  
 </div>
 <script>
-      function submitForm() {
-        var collegeCode = document.getElementById('collegeCode').value;
-        var collegeName = document.getElementById('collegeName').value;
+  function submitForm() {
+    var collegeCode = document.getElementById('collegeCode').value;
+    var collegeName = document.getElementById('collegeName').value;
 
 
-        if (!collegeCode || !collegeName) {
-            alert('Please fill all the required fields.');
-            return false;
+    if (!collegeCode || !collegeName) {
+        document.getElementById('error-message').textContent = 'Please fill all the required fields.';
+        return false;
+    }
+
+    // Get the CSRF token from the meta tag
+    const csrfTokenMeta = document.querySelector('meta[name="csrf-token"]');
+    if (!csrfTokenMeta) {
+        console.error('CSRF token meta tag not found.');
+        document.getElementById('error-message').textContent = 'CSRF token not found.';
+        return false;
+    }
+    const csrfToken = csrfTokenMeta.getAttribute('content');
+
+    fetch(`/colleges/check_duplicate/${encodeURIComponent(collegeCode)}`, {
+        method: 'POST',
+            body: formData,
+            headers: {
+                "X-CSRFToken": csrfToken,
+            },
+        })
+    .then(response => response.json())
+    .then(data => {
+        if (data.exists) {
+            document.getElementById('error-message').textContent = 'College Code already exists. Please choose a different College Code.';
+        } else {
+            document.getElementById('addCollegeForm').submit();
         }
-        var form = document.querySelector('form');
-        form.submit();
-      }
+    })
+    .catch(error => {
+        console.error('Error checking for duplicate College Code:', error);
+        document.getElementById('error-message').textContent = 'An error occurred while checking for duplicate College Code.';
+    });
+}    
+
 </script>
 {% endblock %}
