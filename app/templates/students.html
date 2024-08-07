@@ -15,8 +15,8 @@
                 <thead>
                     <tr>
                         <th>ID</th>
-                        <th>First Name</th>
                         <th>Last Name</th>
+                        <th>First Name</th>
                         <th>Course</th>
                         <th>Year</th>
                         <th>Gender</th>
@@ -27,8 +27,8 @@
                         {% for student in students_data %}
                         <tr>
                             <td>{{ student['studentID'] }}</td>
-                            <td>{{ student['studentFname'] }}</td>
                             <td>{{ student['studentLname'] }}</td>
+                            <td>{{ student['studentFname'] }}</td>
                             <td>{{ student['course'] }}</td>
                             <td>{{ student['year'] }}</td>
                             <td>{{ student['gender'] }}</td>
@@ -63,7 +63,7 @@
                 <div class="modal-body">
                     <form id="editForm" method="post" action="{{ url_for('students.update_student_route') }}">
                         <div class="inputBox">
-                            <input type="text" id="editStudentId" name="editStudentId" value="{{studentID }}" required>
+                            <input type="text" id="editStudentId" name="editStudentId" value="{{studentID }}" required disabled>
                             <label for="editStudentId">Student ID:</label>
                         </div>
                         <div class="inputBox">
