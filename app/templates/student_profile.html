@@ -10,7 +10,7 @@
         <div class="left">
             <img src="{{ student_data['profile_picture'] or 'https://res.cloudinary.com/dtounqe2m/image/upload/v1703271588/webssis/default-pic.jpg' }}" alt="user--pic" id="profile-image">
             <div class="dark-overlay"></div>
-            <button class="edit-button" onclick="openCloudinaryWidget()">Change Profile Picture</i></button>
+            <button class="edit-button" onclick="openCloudinaryWidget()">Change Profile Picture</button>
             <div class="profile--name">
                 <h4><b>Student ID: {{ student_data['studentID'] }}</b></h4>
                 <p>STUDENT</p>
@@ -63,29 +63,32 @@
 <script>
     function openCloudinaryWidget() {
         cloudinary.openUploadWidget({
-            cloudName: 'dtounqe2m',
-            uploadPreset: 'ml_default',
-            sources: ['local', 'url', 'camera'],
-            cropping: true,
-            multiple: false,
-            resourceType: 'image',
-            publicId: 'profile_picture_' + '{{ student_data["studentID"] }}',
-            folder: 'web_ssis',
-            fieldName: 'file',
-            showAdvancedOptions: true,
+            cloudName: 'dtounqe2m',  
+            uploadPreset: 'ml_default', 
+            sources: ['local', 'url'], 
+            cropping: true, 
+            multiple: false, 
+            folder: 'web_ssis', 
+            showAdvancedOptions: false,  
+            showUploadMoreButton: false 
         }, (error, result) => {
-            if (!error && result && result.event === 'success') {
+            if (error) {
+                console.error("Error uploading image:", error.message || error);
+                alert("Error uploading image: " + (error.message || error));
+                return;
+            }
+            if (result && result.event === 'success') {
                 const imageUrl = result.info.secure_url;
+                console.log("Image uploaded successfully. URL: ", imageUrl);
                 document.getElementById('profile-image').src = imageUrl;
-                // Send the new image URL to the server to update the database
-                updateProfilePicture(imageUrl);
+                updateProfilePicture(imageUrl)
             }
         });
     }
 
     function updateProfilePicture(imageUrl) {
         const studentID = '{{ student_data["studentID"] }}'; // or fetch dynamically if not available in template
-
+        console.log(studentID, imageUrl)
         fetch('/students/update_profile_picture', {
             method: 'POST',
             headers: {

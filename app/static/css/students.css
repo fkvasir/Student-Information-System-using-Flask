@@ -265,7 +265,7 @@ table thead tr{
 /* Edit Button */
 .custom-edit-button {
     background-color: #ffc107;
-    color: #100f0f;
+    color: #000;
     border: 1px solid #ffc107;
     padding: 5px 10px; 
     border-radius: 4px;
@@ -274,8 +274,8 @@ table thead tr{
 }
 .edit-button {
     background-color: transparent;
-    color: #f1f1f1;
-    border: 1px solid black;
+    color: #ededed;
+    border: 1px solid transparent;
     padding: 5px 10px; 
     border-radius: 4px;
     cursor: pointer;
@@ -300,6 +300,7 @@ table thead tr{
 .custom-studentdelete-button:hover {
     background-color: #a90a1a;
 }
+
 .custom-coursedelete-button {
     background-color: #dc3545; 
     color: #fff; 

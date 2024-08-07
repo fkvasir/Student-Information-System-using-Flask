@@ -25,3 +25,15 @@ class Course:
 
         cursor.close()
         return courses
+    
+    def search_course(query, criteria):
+        connection = mysql.connection
+        cursor = connection.cursor(dictionary=True)
+        
+        search_query = f"SELECT * FROM course WHERE {criteria} LIKE %s"
+        like_query = '%' + query + '%'
+        cursor.execute(search_query, (like_query,))
+        data = cursor.fetchall()
+        cursor.close()
+        
+        return data

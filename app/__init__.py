@@ -29,6 +29,7 @@ def create_app():
 
     from .controller.colleges import colleges
     from .controller.courses import courses
+    
     from .controller.students import students
 
 

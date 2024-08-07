@@ -3,10 +3,11 @@ from app.services.students_service import get_all_students
 from . import students
 from app.services.students_service import add_student, delete_student, update_student
 from app.models.studentsModel import Student
+from app.models.collegeModel import College
 from app import mysql
 from app.models.coursesModel import Course
 from app.services.cloudinary_service import upload_image
-
+from app.services.courses_service import get_all_courses
 @students.route('/')
 def index():
     return render_template('students.html')
@@ -15,7 +16,8 @@ def index():
 @students.route('/students')
 def show_students():
     students_data = get_all_students()
-    return render_template('students.html', students_data=students_data)
+    courses_data = get_all_courses()  # Fetch all courses
+    return render_template('students.html', students_data=students_data, courses_data=courses_data)
 
 @students.route('/students/add', methods=['GET', 'POST'])
 def add_student_form():
@@ -138,6 +140,7 @@ def update_profile_picture():
         data = request.get_json()
         student_id = data.get('studentID')
         profile_picture = data.get('profile_picture')
+        print("Updating STudent Iamge", student_id, profile_picture)
 
         try:
             connection = mysql.connection
@@ -161,11 +164,20 @@ def update_profile_picture():
 @students.route('/search', methods=['GET'])
 def search_students():
     query = request.args.get('query')
+    option = request.args.get('option')
     criteria = request.args.get('criteria')
+    print("hello",query, option, criteria)
 
     if not query or not criteria:
         return jsonify({'status': 'error', 'message': 'Invalid search parameters'})
-
-    students_data = Student.search_students(query, criteria)
-
-    return render_template('search_results.html', students_data=students_data)
+    
+    if option == 'student':
+        data = Student.search_students(query, criteria)
+        return render_template('search_results.html', students_data=data)
+    elif option == 'colleges':
+        data = College.search_colleges(query, criteria)
+        return render_template('search_results_colleges.html', college_data=data)
+    else:
+        data = Course.search_course(query,criteria)
+        return render_template('search_results_course.html', course_data=data)
+        

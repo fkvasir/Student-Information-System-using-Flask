@@ -12,3 +12,4 @@ def search_all(query):
     }
 
     return results
+

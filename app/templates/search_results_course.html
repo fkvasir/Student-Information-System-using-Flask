@@ -1,0 +1,37 @@
+{% extends "layouts.html" %}
+
+{% block content %}
+<section class="student">
+    <div class="student-list">
+        <div class="students-header">
+            <h3>Search Results</h3>
+            <a href="{{ url_for('courses.show_courses') }}" class="clear-results-link">
+                <h6>Clear Results</h6>
+            </a>
+        </div>
+
+        {% if course_data %}
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>CourseCode</th>
+                    <th>Course Name</th>
+                    <th>College</th>
+                </tr>
+            </thead>
+            <tbody>
+            {% for course in course_data %}
+                <tr>
+                    <td>{{ course['courseCode'] }}</td>
+                    <td>{{ course['courseName'] }}</td>
+                    <td>{{ course['college'] }}</td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+    {% else %}
+    <p>No results found.</p>
+    {% endif %}
+</section>
+{% endblock %}

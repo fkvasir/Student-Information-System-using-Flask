@@ -1,5 +1,7 @@
 # courses_service.py
 from app import mysql
+from app.models.coursesModel import Course
+
 
 def get_all_courses():
     connection = mysql.connection

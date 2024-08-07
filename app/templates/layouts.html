@@ -88,14 +88,60 @@
         src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
         <script src="https://widget.cloudinary.com/v2.0/global/all.js" type="text/javascript"></script>
         <script>
+            const url = window.location.href
+            console.log("url", url)
+            const selectElement = document.getElementById('searchCriteria');
+            const params = new Proxy(new URLSearchParams(window.location.search), {
+                get: (searchParams, prop) => searchParams.get(prop),
+              });
+              // Get the value of "some_key" in eg "https://example.com/?some_key=some_value"
+              let value = params.option; 
+              console.log("query params", value)
+              if (url == "http://127.0.0.1:8080/colleges" || value == 'colleges') {
+                    const searchOption = ["collegeCode", "collegeName"]
+
+                     // Remove all children of the select element
+                while (selectElement.firstChild) {
+                    selectElement.removeChild(selectElement.firstChild);
+                }
+
+                    searchOption.forEach( function(opt){
+                        let optn = document.createElement('option');
+                        console.log("|Hey", opt);
+                        optn.value = opt;
+                        optn.innerHTML = opt;  // Set the text inside the option
+                        selectElement.appendChild(optn);
+                    })
+              }
+
+            if (url == "http://127.0.0.1:8080/courses" || value == 'courses') {
+            
+                // Remove all children of the select element
+                while (selectElement.firstChild) {
+                    selectElement.removeChild(selectElement.firstChild);
+                }
+            
+                // Array of new options
+                const searchOptions = ["courseCode", "courseName", "college"];
+            
+                // Add new options to the select element
+                searchOptions.forEach(function(opt) {
+                    let optn = document.createElement('option');
+                    console.log("|Hey", opt);
+                    optn.value = opt;
+                    optn.innerHTML = opt;  // Set the text inside the option
+                    selectElement.appendChild(optn);
+                });
+            }
+
             function updateSearchInput() {
                 var searchCriteria = document.getElementById('searchCriteria').value;
                 var searchInputContainer = document.getElementById('searchInputContainer');
+
             
                 if (searchCriteria === 'year' || searchCriteria === 'gender') {
                     var options;
             
-
                     if (searchCriteria === 'year') {
                         options = `
                             <option value="1st Year">1st Year</option>
@@ -117,6 +163,17 @@
                             ${options}
                         </select>
                     `;
+                } else if (searchCriteria === 'course') {
+                    var coursesOptions = '';
+                    courses.forEach(function(course) {
+                        coursesOptions += `<option value="${course.courseCode}">${course.courseName}</option>`;
+                    });
+            
+                    searchInputContainer.innerHTML = `
+                        <select id="searchInput">
+                            ${coursesOptions}
+                        </select>
+                    `;
                 } else {
                     searchInputContainer.innerHTML = `
                         <input type="text" id="searchInput" placeholder="Search"/>
@@ -124,15 +181,37 @@
                 }
             }
             
+            
             function performSearch() {
                 var searchInput = document.getElementById('searchInput').value;
                 var searchCriteria = document.getElementById('searchCriteria').value;
+
+              
+                if(searchInput == ""){
+                    return
+                }
+
+
+
+                if (url == "http://127.0.0.1:8080/courses") {
+                    var redirectUrl = "/search?query=" + encodeURIComponent(searchInput) + "&criteria="+searchCriteria + "&option=" + 'courses';
+                    window.location.href = redirectUrl;
+                    return
+                }
+
+                
+                if (url == "http://127.0.0.1:8080/colleges") {
+                    var redirectUrl = "/search?query=" + encodeURIComponent(searchInput) + "&criteria="+searchCriteria + "&option=" + 'colleges';
+                    window.location.href = redirectUrl;
+                    return
+                }
             
-                var redirectUrl = "/search?query=" + encodeURIComponent(searchInput) + "&criteria=" + searchCriteria;
+                var redirectUrl = "/search?query=" + encodeURIComponent(searchInput) + "&criteria=" + searchCriteria + "&option=" + 'student';
                 window.location.href = redirectUrl;
             }
             
         </script>
+        
 </body>
 
 
