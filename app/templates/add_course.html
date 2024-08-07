@@ -46,7 +46,6 @@
         const csrfTokenMeta = document.querySelector('meta[name="csrf-token"]');
         if (!csrfTokenMeta) {
             console.error('CSRF token meta tag not found.');
-            document.getElementById('error-message').textContent = 'CSRF token not found.';
             return false;
         }
         const csrfToken = csrfTokenMeta.getAttribute('content');

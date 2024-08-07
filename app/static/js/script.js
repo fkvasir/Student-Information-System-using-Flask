@@ -206,7 +206,7 @@ document.addEventListener('DOMContentLoaded', function() {
                     alert('Course added successfully!');
                     window.location.href = "/courses";
                 } else {
-                    alert('Error adding student: ' + data.message);
+                    alert('Error adding course: ' + data.message);
                 }
             }) 
             .catch(error => {
