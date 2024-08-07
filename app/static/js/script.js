@@ -184,12 +184,14 @@ document.addEventListener('DOMContentLoaded', function() {
             var courseCode = document.getElementById('courseCode').value;
             var courseName = document.getElementById('courseName').value;
             var college = document.getElementById('college').value;
+            
             var csrfToken = document.querySelector("meta[name='csrf_token']").content;
             
             var formData = new FormData();
             formData.append('courseCode', courseCode);
             formData.append('courseName', courseName);
             formData.append('college', college);
+
 
             fetch('/courses/add', {
                 method: 'POST',
@@ -198,18 +200,13 @@ document.addEventListener('DOMContentLoaded', function() {
                     "X-CSRFToken": csrfToken,
                 },
             })
-            .then(response => {
-
-                console.log(response);
-                return response.json();
-            })
+            .then(response => response.json())
             .then(data => {
-                console.log(data);  
                 if (data.status === 'success') {
                     alert('Course added successfully!');
                     window.location.href = "/courses";
                 } else {
-                    alert('Error adding college: ' + data.message);
+                    alert('Error adding student: ' + data.message);
                 }
             }) 
             .catch(error => {

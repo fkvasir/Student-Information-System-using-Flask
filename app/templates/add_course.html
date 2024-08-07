@@ -8,7 +8,7 @@
     <h2><b>Add New Course</b></h2>
 
     <div class="label-containers">
-      <form method="post" action="{{ url_for('courses.add_course_form') }}">
+      <form id="addCourseForm" method="post" action="{{ url_for('courses.add_course_form') }}">
 
         <label for="courseCode">Course Code:</label>
         <input type="text" id="courseCode" name="courseCode" required>
@@ -18,31 +18,59 @@
 
         <label for="college">College:</label>
         <select id="college" name="college" required>
-            {% for college in colleges_data %}
+            {% for college in college_data %}
                 <option value="{{ college.collegeCode }}">{{ college.collegeCode }}</option>
             {% endfor %}
         </select>
-        
+
+        <div id="error-message" style="color: red;"></div>
 
         <button type="button" id="addCourseButton" onclick="submitForm()">Add Course</button>
       </form>
     </div>
   </div>  
 </div>
+
 <script>
     function submitForm() {
-      var courseCode = document.getElementById('courseCode').value;
-      var courseName = document.getElementById('courseName').value;
-      var college = document.getElementById('college').value;
-
-      if (!courseCode || !courseName || !college) {
-          alert('Please fill all the required fields.');
-          return false;
-      }
-
-  
-      var form = document.querySelector('form');
-      form.submit();
-    }
+        var courseCode = document.getElementById('courseCode').value;
+        var courseName = document.getElementById('courseName').value;
+        var college = document.getElementById('college').value;
+    
+        if (!courseCode || !courseName || !college) {
+            document.getElementById('error-message').textContent = 'Please fill all the required fields.';
+            return false;
+        }
+    
+        // Get the CSRF token from the meta tag
+        const csrfTokenMeta = document.querySelector('meta[name="csrf-token"]');
+        if (!csrfTokenMeta) {
+            console.error('CSRF token meta tag not found.');
+            document.getElementById('error-message').textContent = 'CSRF token not found.';
+            return false;
+        }
+        const csrfToken = csrfTokenMeta.getAttribute('content');
+    
+        fetch(`/courses/check_duplicate/${encodeURIComponent(courseCode)}`, {
+            method: 'POST',
+                body: formData,
+                headers: {
+                    "X-CSRFToken": csrfToken,
+                },
+            })
+        .then(response => response.json())
+        .then(data => {
+            if (data.exists) {
+                document.getElementById('error-message').textContent = 'Course Code already exists. Please choose a different Course Code.';
+            } else {
+                document.getElementById('addCourseForm').submit();
+            }
+        })
+        .catch(error => {
+            console.error('Error checking for duplicate Course Code:', error);
+            document.getElementById('error-message').textContent = 'An error occurred while checking for duplicate Course Code.';
+        });
+    }    
+    
 </script>
 {% endblock %}

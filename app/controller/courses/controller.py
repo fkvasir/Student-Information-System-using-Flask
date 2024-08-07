@@ -12,31 +12,67 @@ def show_courses():
     courses_data = get_all_courses()
     return render_template('courses.html', courses_data=courses_data)
 
+
 @courses.route('/courses/add', methods=['GET', 'POST'])
 def add_course_form():
     if request.method == 'POST':
         course_code = request.form.get('courseCode')
         course_name = request.form.get('courseName')
         college = request.form.get('college')
-        
-        print(f"Received data: Course Code - {course_code}, Course Name - {course_name}, College - {college}")
+
+        # Validate required fields
         if not course_code or not course_name or not college:
-            return jsonify({'status': 'error', 'message': 'All fields are required.'}), 400
+            return jsonify({'status': 'error', 'message': 'All fields are required!'}), 400
+
+        # Check if courseCode already exists
+        connection = mysql.connection
+        cursor = connection.cursor(dictionary=True)
+        cursor.execute("SELECT * FROM course WHERE courseCode = %s", (course_code,))
+        existing_course = cursor.fetchone()
+
+        if existing_course:
+            cursor.close()
+            return jsonify({'status': 'error', 'message': 'Course Code already exists!'}), 400
+
         try:
+            # Add course
             add_course(course_code, course_name, college)
+            cursor.close()
             return jsonify({'status': 'success', 'message': 'Course added successfully!'})
         except Exception as e:
-            print(f"Error adding course: {e}")
-            return jsonify({'status': 'error', 'message': str(e)})
+            print(f"Error adding Course: {e}")
+            cursor.close()
+            return jsonify({'status': 'error', 'message': str(e)}), 500
+    else:
+        connection = mysql.connection
+        cursor = connection.cursor(dictionary=True)
+        cursor.execute("SELECT * FROM college")
+        college_data = cursor.fetchall()
 
-    connection = mysql.connection
-    cursor = connection.cursor(dictionary=True)
-    cursor.execute("SELECT * FROM college")
-    colleges_data = cursor.fetchall()
+        course_code = request.args.get('code')
+        courses_data = None
+        if course_code:
+            cursor.execute("SELECT * FROM course WHERE courseCode = %s", (course_code,))
+            courses_data = cursor.fetchone()
 
-    return render_template('add_course.html', colleges_data=colleges_data)
+        cursor.close()
 
+        return render_template('add_course.html', college_data=college_data, courses_data=courses_data)
+    
 
+@courses.route('/courses/check_duplicate/<course_code>', methods=['GET'])
+def check_duplicate(course_code):
+    try:
+        connection = mysql.connection
+        cursor = connection.cursor(dictionary=True)
+        cursor.execute("SELECT 1 FROM course WHERE courseCode = %s", (course_code,))
+        exists = cursor.fetchone() is not None
+        cursor.close()
+        
+        return jsonify({'exists': exists})
+    except Exception as e:
+        print(f"Error checking for duplicate Course Code: {e}")
+        return jsonify({'exists': False, 'error': str(e)}), 500    
 
 
 
