@@ -35,13 +35,12 @@
       var courseName = document.getElementById('courseName').value;
       var college = document.getElementById('college').value;
 
-      // Check if all required fields are filled
       if (!courseCode || !courseName || !college) {
           alert('Please fill all the required fields.');
           return false;
       }
 
-      // If validation passes, submit the form
+  
       var form = document.querySelector('form');
       form.submit();
     }

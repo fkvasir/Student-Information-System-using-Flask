@@ -19,6 +19,9 @@ def add_college_form():
         college_code = request.form.get('collegeCode')
         college_name = request.form.get('collegeName')
         
+        if not college_code or not college_name:
+            return jsonify({'status': 'error', 'message': 'All fields are required.'}), 400 
+        
         try:
             add_college(college_code, college_name)
             return jsonify({'status': 'success', 'message': 'College added successfully!'})

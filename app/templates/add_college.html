@@ -19,9 +19,23 @@
         <input type="text" id="collegeName" name="collegeName" required>
 
 
-        <button type="button" id="addCollegeButton">Add College</button>
+        <button type="button" id="addCollegeButton" onclick="submitForm()">Add College</button>
       </form>
     </div>
   </div>  
 </div>
+<script>
+      function submitForm() {
+        var collegeCode = document.getElementById('collegeCode').value;
+        var collegeName = document.getElementById('collegeName').value;
+
+
+        if (!collegeCode || !collegeName) {
+            alert('Please fill all the required fields.');
+            return false;
+        }
+        var form = document.querySelector('form');
+        form.submit();
+      }
+</script>
 {% endblock %}
