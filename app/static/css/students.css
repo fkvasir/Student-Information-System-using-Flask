@@ -49,12 +49,21 @@ body{
 .active{
     background: #e0e0e058;
 }
-.menu a{
+.navigator{
+    display: block;
+}
+.menu a {
     color: aliceblue;
     font-size: 14px;
     text-decoration: none;
     display: flex;
     gap: 1.5rem;
+    transition: color 0.3s; /* Optional: Add transition for smooth color change */
+}
+
+.menu a:hover {
+    color: aliceblue; /* Ensure the color remains the same on hover */
+    text-decoration: none; /* Remove underline or any decoration on hover */
 }
 .menu a span {
     overflow: hidden;
@@ -150,8 +159,16 @@ body{
     border-radius: 10px;
     box-shadow: 0 20px 35px rgba(0, 0, 0, 0.1);
 }
+.students-header{
+    justify-content: center;
+}
 .students-header h2{
     color: maroon;
+
+}
+.students-header h6{
+    padding-right: 40px;
+    
 }
 
 .college{
@@ -240,11 +257,25 @@ table thead tr{
     justify-content: space-between;
     align-items: center;
 }
+.course-header,
+.students-header,
+.college-header h3{
+    vertical-align: middle;
+}
 /* Edit Button */
 .custom-edit-button {
     background-color: #ffc107;
-    color: #000;
+    color: #100f0f;
     border: 1px solid #ffc107;
+    padding: 5px 10px; 
+    border-radius: 4px;
+    cursor: pointer;
+    font-weight: bold;
+}
+.edit-button {
+    background-color: transparent;
+    color: #f1f1f1;
+    border: 1px solid black;
     padding: 5px 10px; 
     border-radius: 4px;
     cursor: pointer;
@@ -252,6 +283,9 @@ table thead tr{
 }
 .custom-edit-button:hover {
     background-color: #c69502;
+}
+.edit-button:hover {
+    background-color: #c60202;
 }
 /* Delete Button */
 .custom-studentdelete-button {
@@ -421,7 +455,7 @@ table thead tr{
     padding: 20px;
   }
   
-.add-container h2 {
+.add-container h3 {
     text-align: center;
   }
   
