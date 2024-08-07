@@ -28,18 +28,32 @@ def add_student_form():
         course = request.form.get('course')
         year = request.form.get('year')
         gender = request.form.get('gender')
-        profile_picture = request.form.get('profile_picture') 
+        profile_picture = request.form.get('profile_picture')
 
         print(f"Profile picture URL: {profile_picture}")  # Debugging line
         
+        # Validate required fields
         if not student_id or not student_fname or not student_lname or not course or not year or not gender:
             return jsonify({'status': 'error', 'message': 'All fields are required!'}), 400
 
+        # Check if studentID already exists
+        connection = mysql.connection
+        cursor = connection.cursor(dictionary=True)
+        cursor.execute("SELECT * FROM student WHERE studentID = %s", (student_id,))
+        existing_student = cursor.fetchone()
+        
+        if existing_student:
+            cursor.close()
+            return jsonify({'status': 'error', 'message': 'Student ID already exists!'}), 400
+        
         try:
+            # Assuming you have a function to add the student
             add_student(student_id, student_fname, student_lname, course, year, gender, profile_picture)
+            cursor.close()
             return jsonify({'status': 'success', 'message': 'Student added successfully!'})
         except Exception as e:
             print(f"Error adding student: {e}")
+            cursor.close()
             return jsonify({'status': 'error', 'message': str(e)})
     else:
         connection = mysql.connection
@@ -50,14 +64,28 @@ def add_student_form():
         student_id = request.args.get('id')
         student_data = None
         if student_id:
-            student_data = Student.get_by_id(student_id)
+            # Fetch student data if id is provided
+            cursor.execute("SELECT * FROM student WHERE studentID = %s", (student_id,))
+            student_data = cursor.fetchone()
 
         cursor.close()
 
         return render_template('add_student.html', courses_data=courses_data, student_data=student_data)
+    
 
-
+@students.route('/students/check_duplicate/<student_id>', methods=['GET'])
+def check_duplicate(student_id):
+    try:
+        connection = mysql.connection
+        cursor = connection.cursor(dictionary=True)
+        cursor.execute("SELECT 1 FROM student WHERE studentID = %s", (student_id,))
+        exists = cursor.fetchone() is not None
+        cursor.close()
         
+        return jsonify({'exists': exists})
+    except Exception as e:
+        print(f"Error checking for duplicate student ID: {e}")
+        return jsonify({'exists': False, 'error': str(e)}), 500    
 
 
 

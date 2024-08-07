@@ -80,21 +80,48 @@
   }
 
   function submitForm() {
-      const profilePictureUrl = document.getElementById('profile-picture').value;
-      var studentID = document.getElementById('studentID').value;
-      var studentFname = document.getElementById('studentFname').value;
-      var studentLname = document.getElementById('studentLname').value;
-      var course = document.getElementById('course').value;
-      var year = document.getElementById('year').value;
-      var gender = document.getElementById('gender').value;
+    const profilePictureUrl = document.getElementById('profile-picture').value;
+    var studentID = document.getElementById('studentID').value;
+    var studentFname = document.getElementById('studentFname').value;
+    var studentLname = document.getElementById('studentLname').value;
+    var course = document.getElementById('course').value;
+    var year = document.getElementById('year').value;
+    var gender = document.getElementById('gender').value;
 
-      if (!studentID || !studentFname || !studentLname || !course || !year || !gender) {
+    if (!studentID || !studentFname || !studentLname || !course || !year || !gender) {
         alert('Please fill all the required fields.');
         return false;
-      }
+    }
 
-      document.getElementById('addStudentForm').submit();
-   }
+    // Get the CSRF token from the meta tag
+    const csrfToken = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
+
+    fetch(`/students/check_duplicate/${encodeURIComponent(studentID)}`, {
+        method: 'GET', // or 'POST' if needed
+        headers: {
+            'Content-Type': 'application/json',
+            'X-CSRFToken': csrfToken
+        }
+    })
+    .then(response => {
+        if (!response.ok) {
+            throw new Error('Network response was not ok.');
+        }
+        return response.json();
+    })
+    .then(data => {
+        if (data.exists) {
+            alert('Student ID already exists. Please choose a different ID.');
+        } else {
+            document.getElementById('addStudentForm').submit();
+        }
+    })
+    .catch(error => {
+        console.error('Error checking for duplicate student ID:', error);
+        alert('An error occurred while checking for duplicate student ID.');
+    });
+}
+
 </script>
 
 {% endblock %}
