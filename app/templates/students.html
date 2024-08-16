@@ -29,8 +29,8 @@
                         {% for student in students_data %}
                         <tr>
                             <td>
-                                <img src= {{ student['profile_picture'] }} />
-                            </td>
+                                <img src="{{ student['profile_picture'] or 'https://res.cloudinary.com/dtounqe2m/image/upload/v1703271588/webssis/default-pic.jpg' }}" />
+                            </td>                            
                             <td>{{ student['studentID'] }}</td>
                             <td>{{ student['studentLname'] }}</td>
                             <td>{{ student['studentFname'] }}</td>
