@@ -23,6 +23,8 @@ def show_students():
 def add_student_form():
     if request.method == 'POST':
         student_id = request.form.get('studentID')
+        if not re.match(r'^\d{4}-\d{4}$', student_id):
+            return jsonify ({'status': 'error', 'message': 'Invalid ID format.'}),
         student_fname = request.form.get('studentFname')
         student_lname = request.form.get('studentLname')
         course = request.form.get('course')

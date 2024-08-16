@@ -59,12 +59,12 @@
                             <label for="editCourseName">Course Name:</label>
                         </div>
                         <div class="inputBox">
+                            <label class="college-label" for="editCollege">College:</label>
                             <select class="college-dropdown" id="editCollege" name="editCollege" required>
                                 {% for course in courses %}
                                     <option value="{{ college.collegeCode }}">{{ college.collegeCode }} - {{ college.collegeName }}</option>
                                 {% endfor %}
                             </select>
-                            <label class="college-label" for="editCollege">College:</label>
                         </div>
                         
                         <div class="modal-footer">

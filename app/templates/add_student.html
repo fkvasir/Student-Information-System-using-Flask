@@ -16,7 +16,7 @@
     <div class="label-containers">
       <form id="addStudentForm" method="POST" action="{{ url_for('students.add_student_form') }}" enctype="multipart/form-data">
         <label for="studentID">Student ID:</label>
-        <input type="text" id="studentID" name="studentID" required>
+        <input type="text" id="studentID" name="studentID" pattern="^\d{4}-\d{4}$" required title="Format: 0000-0000">        
 
         <label for="studentFname">First Name:</label>
         <input type="text" id="studentFname" name="studentFname" required>
@@ -63,7 +63,10 @@
         multiple: false, 
         folder: 'web_ssis', 
         showAdvancedOptions: false,  
-        showUploadMoreButton: false 
+        showUploadMoreButton: false,
+        maxFileSize: 5 * 1024 * 1024,
+        resourceType: 'image',
+        clientAllowedFormats: ['jpg', 'png', 'jpeg']
     }, (error, result) => {
         if (error) {
             console.error("Error uploading image:", error.message || error);
@@ -88,9 +91,17 @@
     var year = document.getElementById('year').value;
     var gender = document.getElementById('gender').value;
 
+    var studentIDPattern = /^\d{4}-\d{4}$/
+
     if (!studentID || !studentFname || !studentLname || !course || !year || !gender) {
         alert('Please fill all the required fields.');
         return false;
+    }
+
+    if (!studentIDPattern.test(studentID)) {
+      alert('Student ID must be in 0000-0000 format');
+      console.log('Invalid format. Form not submitted.')
+      return false;
     }
 
     // Get the CSRF token from the meta tag

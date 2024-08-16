@@ -199,6 +199,7 @@ table thead tr{
 }
 
 .table th,
+.table td,
 .table td{
     padding: 12px 15px;
 }
@@ -380,30 +381,26 @@ table thead tr{
 }
 
 /* Input Box */
+/* Input Box */
 .inputBox {
     position: relative;
     border-bottom: 2px solid black;
     margin: 10px;
+    display: flex;
+    flex-direction: column;
 }
 
-.inputBox label {
-    position: absolute;
-    top: 10px;
-    left: 10px;
-    transform: translateY(0);
+/* Label Styling */
+.inputBox label, .college-label {
     font-size: 1em;
     color: black;
     font-weight: 500;
     pointer-events: none;
+    margin-bottom: 5px; /* Adds space between the label and the dropdown */
     transition: .5s;
 }
 
-.inputBox input:valid ~ label,
-.inputBox input:focus ~ label {
-    top: -10px;
-    font-size: 0.75em;
-}
-
+/* Input Styling */
 .inputBox input {
     width: 100%;
     padding: 15px 10px;
@@ -414,24 +411,24 @@ table thead tr{
     font-weight: 800;
     transition: 0.5s;
 }
-.course-code {
-    padding-top: 15px;
-    margin: 0;
-}
+
+/* Dropdown Styling */
 .college-dropdown {
-    padding: 5px 10px;
-}
-.college-label {
-    position: absolute;
-    top: 10px;
-    left: 10px;
-    transform: translateY(0);
+    padding: 10px; /* Add padding to make the dropdown look better */
     font-size: 1em;
     color: black;
     font-weight: 500;
-    pointer-events: none;
-    transition: .5s;
+    border: 1px solid #ccc;
+    border-radius: 5px; /* Optional: Adds rounded corners */
 }
+
+/* Focus and valid states for label when interacting with the input */
+.inputBox input:valid ~ label,
+.inputBox input:focus ~ label {
+    top: -10px;
+    font-size: 0.75em;
+}
+
 /* Close Button */
 .custom-close-button {
     background-color: #969696;
@@ -608,3 +605,9 @@ table thead tr{
     color: #798088;
 }
 
+.table tbody img {
+    margin-bottom: 20px;
+    border-radius: 5px;
+    height: 150px;
+    width: 150px;
+}

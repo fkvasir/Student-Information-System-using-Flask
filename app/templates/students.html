@@ -14,24 +14,30 @@
             <table class="table">
                 <thead>
                     <tr>
+                        <th>Profile Picture</th>
                         <th>ID</th>
                         <th>Last Name</th>
                         <th>First Name</th>
                         <th>Course</th>
                         <th>Year</th>
                         <th>Gender</th>
+                        <!-- <th>College</th> -->
                         <th>Action</th>
                     </tr>
                 </thead>
                     <tbody>
                         {% for student in students_data %}
                         <tr>
+                            <td>
+                                <img src= {{ student['profile_picture'] }} />
+                            </td>
                             <td>{{ student['studentID'] }}</td>
                             <td>{{ student['studentLname'] }}</td>
                             <td>{{ student['studentFname'] }}</td>
                             <td>{{ student['course'] }}</td>
                             <td>{{ student['year'] }}</td>
                             <td>{{ student['gender'] }}</td>
+                            <!-- <td> {{ student['college']}}</td> -->
                             <td>
                                 <button type="button" class="custom-edit-button" id="editButtonStudent"
                                         data-student-id="{{ student['studentID'] }}"

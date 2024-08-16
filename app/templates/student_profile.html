@@ -70,7 +70,10 @@
             multiple: false, 
             folder: 'web_ssis', 
             showAdvancedOptions: false,  
-            showUploadMoreButton: false 
+            showUploadMoreButton: false,
+            maxFileSize: 5 * 1024 * 1024,
+            resourceType: 'image',
+            clientAllowedFormats: ['jpg', 'png', 'jpeg']
         }, (error, result) => {
             if (error) {
                 console.error("Error uploading image:", error.message || error);
