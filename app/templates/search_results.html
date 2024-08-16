@@ -14,6 +14,7 @@
         <table class="table">
             <thead>
                 <tr>
+                    <th>Profile Picture</th>
                     <th>ID</th>
                     <th>Last Name</th>
                     <th>First Name</th>
@@ -25,6 +26,9 @@
             <tbody>
             {% for student in students_data %}
                 <tr>
+                    <td>
+                        <img src="{{ student['profile_picture'] or 'https://res.cloudinary.com/dtounqe2m/image/upload/v1703271588/webssis/default-pic.jpg' }}" />
+                    </td> 
                     <td>{{ student['studentID'] }}</td>
                     <td>{{ student['studentLname'] }}</td>
                     <td>{{ student['studentFname'] }}</td>
