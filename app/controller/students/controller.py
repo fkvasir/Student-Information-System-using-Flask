@@ -8,6 +8,9 @@ from app import mysql
 from app.models.coursesModel import Course
 from app.services.cloudinary_service import upload_image
 from app.services.courses_service import get_all_courses
+import re
+
+
 @students.route('/')
 def index():
     return render_template('students.html')
