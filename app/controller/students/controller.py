@@ -13,7 +13,7 @@ import re
 
 @students.route('/')
 def index():
-    return render_template('students.html')
+    return redirect(url_for('students.show_students'))
 
 
 @students.route('/students')
