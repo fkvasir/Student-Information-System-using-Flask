@@ -5,6 +5,6 @@ __pycache__/
 .venv/
 venv/
 .env
-static/
+static/*
 tests/
 node_modules/
