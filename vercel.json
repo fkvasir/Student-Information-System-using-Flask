@@ -1,0 +1,5 @@
+{
+  "version": 2,
+  "builds": [{ "source": "run.py", "use": "@vercel/python" }],
+  "routes": [{ "src": "/(.*)", "dest": "run.py" }]
+}
